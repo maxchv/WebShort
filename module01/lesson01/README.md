@@ -1,7 +1,7 @@
 # Введение в Web-технологии. Структура HTML. Форматирование текста при помощи HTML
 
-Практическое задание: [Практика](practice.pdf)
-
-Учебные материалы: [Урок 1](tutorial01.pdf), [Урок 2](tutorial02.pdf)
-
-Домашнее задание: [Домашнее задание 1](hw01.pdf)
+* Видео занятия: [Смотреть на youtube](https://youtu.be/yQAf2UjmuGI) 
+* Демонстрация с занятия: [Открыть](https://github.com/maxchv/WebShort/tree/master/module01/lesson01/demo)
+* Учебные материалы: [Урок 1](tutorial01.pdf), [Урок 2](tutorial02.pdf)
+* Практическое задание: [Открыть](practice.pdf)
+* Домашнее задание: [Открыть](hw01.pdf)
