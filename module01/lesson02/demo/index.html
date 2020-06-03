@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: cursive;
+            /* font-size: 16px; */
+        }
+
+        h2 {
+            color: blue;
+        }
+
+        ul.circle-type {
+            list-style-type: circle;
+            /* background-color: rgb(14, 73, 78); */
+            background-color: rgb(35, 97, 103);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Список продуктов:</h2>
+    <ol>
+        <!-- Упорядоченный список -->
+        <li>Молоко</li>
+        <li>Хлеб</li>
+        <li>Масло</li>
+        <li value="99">Чекушку</li>
+        <li>Пиво</li>
+    </ol>
+
+    <p class="circle-type">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque omnis corrupti similique
+        blanditiis pariatur animi alias, delectus adipisci nisi quia dignissimos aliquid minima doloremque
+        exercitationem totam, sit modi, ut placeat!</p>
+
+    <h2>Список продуктов:</h2>
+    <ul class="circle-type">
+        <!-- Упорядоченный список -->
+        <li style="list-style-type: square;">Молоко</li>
+        <li style="list-style-type: disc;">Хлеб</li>
+        <li>Масло</li>
+        <li>Чекушку</li>
+        <li>Пиво</li>
+    </ul>
+
+    <h2>Вложенные списки</h2>
+    <ul style="list-style-type: '😊 ';">
+        <li>Один</li>
+        <li>Два
+            <ul>
+                <li>Один
+                    <ul>
+                        <li>Один</li>
+                        <li>Два</li>
+                        <li>Три</li>
+                    </ul>
+                </li>
+                <li>Два</li>
+                <li>Три</li>
+            </ul>
+        </li>
+    </ul>
+
+    <ol style="list-style-image: url(marker.png);">
+        <li>Один</li>
+        <li>Два</li>
+        <li>Три</li>
+    </ol>
+
+    <h3>Список определений</h3>
+
+    <dl>
+        <dt>HTML</dt>
+        <dt>XHTML</dt>
+        <dd>Язык гипертекстовой разметки</dd>
+
+        <dt>CSS</dt>
+        <dd>Каскадные таблицы стилей</dd>
+
+        <dt>JavaScript</dt>
+        <dd>Язык программирования</dd>
+
+        <dt>node.js</dt>
+        <dd>Серверный движок JavaScript</dd>
+    </dl>
+
+</body>
+
+</html>
