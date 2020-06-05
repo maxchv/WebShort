@@ -1,0 +1,16 @@
+body {
+    /* background: linear-gradient(45deg,
+            blue 0%, blue 50%,
+            yellow 50%, yellow 100%); */
+    color: white;
+    height: 100vh;
+    background-image: url(../lesson02/img/virus.png);
+    background-attachment: fixed;
+    /* background-repeat: no-repeat; */
+    /* background-position: right bottom; */
+    /* background-size: 100% 100%; */
+}
+
+p {
+    background: rgba(128, 128, 128, 0.8);
+}
