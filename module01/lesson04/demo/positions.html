@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            /* position: relative; */
+            border: 1px solid;
+            width: 100px;
+            height: 100px;
+        }
+
+        .first {
+            opacity: 0.5;
+            background: yellow;
+            position: absolute;
+            top: 50px;
+        }
+
+        .second {
+            top: 50px;
+            opacity: 0.5;
+            background: red;
+            position: absolute;
+            right: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        li {
+            position: absolute;
+            cursor: pointer;
+            background-color: aqua;
+            text-align: center;
+            width: 70px;
+            height: 20px;
+            border: 1px solid;
+            z-index: 10;
+        }
+
+        .item1 {
+            left: 10px;
+        }
+
+        .item2 {
+            left: 80px;
+        }
+
+        .item2:hover {
+            background-color: blue;
+            color: white;
+        }
+
+        .item2:hover li:hover {
+            background-color: red;
+        }
+
+        .item2 ul {
+            display: none;
+        }
+
+        .item2:hover ul {
+            display: block;
+        }
+
+        .item3 {
+            left: 150px;
+        }
+
+        .item4 {
+            left: 220px;
+        }
+
+        .subitem1 {
+            left: 0px;
+            top: 20px;
+        }
+
+        .subitem2 {
+            left: 0px;
+            top: 40px;
+        }
+
+        .subitem3 {
+            left: 0px;
+            top: 60px;
+        }
+
+        .call {
+            line-height: 40px;
+            font-size: 30px;
+            color: red;
+            border: 2px solid red;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            border-radius: 40px;
+            background-color: white;
+            z-index: 100;
+            cursor: pointer;
+            position: fixed;
+            right: 30px;
+            bottom: 50px;
+            box-shadow: 2px 2px 5px gray;
+        }
+
+        .call:hover {
+            box-shadow: none;
+        }
+
+        nav {
+            top: -15px;
+            position: fixed;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li class="item1">First</li>
+            <li class="item2">Second
+                <ul>
+                    <li class="subitem1">SubItem 1</li>
+                    <li class="subitem2">SubItem 2</li>
+                    <li class="subitem3">SubItem 3</li>
+                </ul>
+            </li>
+            <li class="item3">Third</li>
+            <li class="item4">Fourth</li>
+        </ul>
+    </nav>
+
+    <div>
+        <div class="first">block 1</div>
+        <div class="second">block 2</div>
+    </div>
+
+    <div class="call">☎</div>
+
+
+    <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae veritatis quibusdam quidem qui? Porro
+        aperiam labore ducimus eos a maiores placeat beatae, tempora commodi? Expedita officiis aut nemo vel esse?
+        Sint, deleniti. Ullam eius sed nam quibusdam cumque tempora minima qui, veritatis tenetur error ut debitis.
+        Iusto unde esse, ut, nisi amet expedita quibusdam, similique illo inventore quisquam commodi excepturi!
+        Aliquam magnam fugiat maxime numquam sapiente hic nisi labore reprehenderit odio possimus cupiditate, magni
+        quisquam, nam exercitationem minima sint doloribus eligendi. Quod ex quos debitis velit odit minima, nihil
+        totam!
+        Similique laboriosam doloremque, nisi architecto cupiditate nostrum rerum ducimus, dicta qui aliquam voluptatem
+        quos eligendi culpa natus? Minus illum, debitis corporis animi, vitae cumque, repellat facere perspiciatis nam
+        cum cupiditate?
+        Vel autem nulla ullam debitis alias! Facere sit sequi, cum non suscipit, hic eveniet impedit voluptatum
+        repudiandae exercitationem veniam? Neque laboriosam quibusdam quasi, fugit quas et soluta blanditiis quo
+        repudiandae?
+        Illo porro ipsa similique sed praesentium eius, doloremque doloribus perspiciatis iusto sit mollitia consectetur
+        explicabo a sunt amet illum facilis eos vero deleniti officiis pariatur. Deserunt autem eveniet dicta
+        laboriosam!
+        Aliquam consequuntur cumque rem repellendus dolores ipsam provident saepe. Optio, aliquam error. Asperiores
+        dolore, molestiae praesentium et fugit inventore reprehenderit deserunt aspernatur similique modi ratione,
+        doloremque numquam reiciendis iure quia?
+        Nulla pariatur ipsum dolorum sit ut molestiae, unde, ipsam maxime a magnam quisquam necessitatibus! Ipsa, vitae?
+        Minus in ducimus corrupti amet nesciunt magni sit quidem est! Iure, perferendis! Possimus, dolore!
+        Excepturi dicta beatae numquam, dolorum in nam sunt vero iste doloribus accusamus tempore facere quo, inventore
+        ad ratione nesciunt exercitationem ut obcaecati pariatur nemo, nobis et itaque maxime debitis. Tenetur?
+        Omnis nobis asperiores nihil laborum vitae, tempore iste adipisci quo. Nesciunt numquam dolore neque, ducimus
+        optio hic, cumque porro voluptates mollitia iste ullam nostrum itaque amet recusandae aliquam ea repudiandae.
+    </p>
+
+
+
+</body>
+
+</html>

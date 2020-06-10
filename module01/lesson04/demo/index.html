@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+        table {
+            text-align: center;
+            height: 200px;
+            border-collapse: collapse;
+
+        }
+
+        div {
+            border: 1.5px solid blue;
+            border-radius: 20px;
+            width: 390px;
+        }
+
+        td,
+        th {
+            vertical-align: middle;
+            border-right: 1px solid;
+            width: 130px;
+            /* border: 1px solid; */
+        }
+
+        tr {
+            border-top: 1px solid;
+        }
+
+        thead tr:first-child {
+            border-top: none;
+        }
+
+        th:last-child,
+        td:last-child {
+            border-right: none;
+        }
+
+        thead {
+            /* background-color: yellow; */
+        }
+
+        tbody {
+            /* background-size: 100% 100%; */
+            /* background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png); */
+        }
+
+        .second {
+            background-color: magenta;
+        }
+
+        caption {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Table</h1>
+
+    <div>
+        <table>
+            <!-- <caption>Название таблицы</caption> -->
+            <col />
+            <col class="second" />
+            <thead>
+                <tr>
+                    <th><a href=""><img width="64px"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png"
+                                alt="html"></a></th>
+                    <th>CSS</th>
+                    <th>JavaScript</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Содержимое</td>
+                    <td>Красивости</td>
+                    <td>Динамика</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Первая</td>
+                    <td rowspan="2">Третья</td>
+                </tr>
+                <tr>
+                    <td>Первая</td>
+                    <td>Вторая</td>
+                </tr>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>
+
+</body>
+
+</html>
