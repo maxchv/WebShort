@@ -16,28 +16,39 @@
             max-width: 100%;
         }
 
-        figure:nth-child(odd) {
-            flex-basis: 200px;
+        main .row {
+            display: flex;
         }
 
-        figure:nth-child(even) {
-            flex-basis: 400px;
+
+
+        .col-6 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
         }
 
-        @media screen and (min-width: 768px) {
-            main .row {
-                display: flex;
-                height: 1500px;
-            }
+        .col-6 figure:nth-child(2) {
+            order: 2;
+            align-self: flex-start;
+        }
 
-            .col-6 {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                align-items: stretch;
-                justify-content: center;
-                align-content: flex-start;
-            }
+        .col-6 figure:nth-child(1) {
+            flex-basis: 500px;
+            order: -1;
+            align-self: flex-start;
+        }
+
+        .col-6 figure:nth-child(1):after {
+            content: 'figure 1';
+            display: block;
+        }
+
+        .col-6 figure:nth-child(2):after {
+            content: 'figure 2';
+            display: block;
         }
     </style>
 </head>
