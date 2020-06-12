@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox</title>
+    <style>
+        img {
+            max-width: 100%;
+        }
+
+        figure {
+            text-align: center;
+            border: 1px solid;
+            max-width: 100%;
+        }
+
+        figure:nth-child(odd) {
+            flex-basis: 200px;
+        }
+
+        figure:nth-child(even) {
+            flex-basis: 400px;
+        }
+
+        @media screen and (min-width: 768px) {
+            main .row {
+                display: flex;
+                height: 1500px;
+            }
+
+            .col-6 {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: stretch;
+                justify-content: center;
+                align-content: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="row">
+        <div class="col-12">
+            <h1>Flexbox</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-3">
+                <nav>
+                    <ul>
+                        <li><a href="https://caniuse.com/#feat=flexbox" target="_blank">Can I Use</a></li>
+                        <li><a href="https://developer.mozilla.org/ru/docs/Learn/CSS/CSS_layout/Flexbox"
+                                target="_blank">Flexbox</a>
+                        </li>
+                        <li><a href="https://flexboxfroggy.com/#ru" target="_blank">FlexBox Foggy</a></li>
+                        <li><a href="">Item</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-6">
+                <figure>
+                    <img src="https://picsum.photos/300/200?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/300?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/400?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/300?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/200?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/200?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/300?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/400?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/300?random=1" alt="" />
+                </figure>
+                <figure>
+                    <img src="https://picsum.photos/300/200?random=1" alt="" />
+                </figure>
+
+            </div>
+        </div>
+
+    </main>
+    <footer class="row">
+        <div class="col-12">
+            &copy; Company name
+        </div>
+    </footer>
+</body>
+
+</html>

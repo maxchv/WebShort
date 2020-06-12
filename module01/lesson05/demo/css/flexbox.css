@@ -1,0 +1,33 @@
+img {
+    max-width: 100%;
+}
+
+figure {
+    text-align: center;
+    border: 1px solid;
+    max-width: 100%;
+}
+
+figure:nth-child(odd) {
+    flex-basis: 200px;
+}
+
+figure:nth-child(even) {
+    flex-basis: 400px;
+}
+
+@media screen and (min-width: 768px) {
+    main .row {
+        display: flex;
+        height: 1500px;
+    }
+
+    .col-6 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
+        align-content: flex-start;
+    }
+}
