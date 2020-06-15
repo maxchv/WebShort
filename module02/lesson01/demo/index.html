@@ -4,12 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>JavaScript</title>
+    <style>
+        * {
+            font-family: cursive;
+        }
+    </style>
 </head>
 
 <body>
+    <h1>JavaScript</h1>
 
+    <script>
+        /*console.log("Это пример");*/
+        //alert("Привет JavaScript");
+        // Типы данных и переменные
+        // В имени использовать: a-z A-Z 0-9 $ _
+        var a = 4.5; // числа
+        var b = 2;
+        var c = a + b;
+        console.log(c);
+        console.log(a * b);
+        console.log(a / b);
+        var str = 'Это строка'; // строки
+        console.log(str, typeof (str));
+        str = "И это тоже строка";
+        console.log(str, typeof (str));
+        str = 10;
+        console.log(str, typeof (str));
+
+        a = 10;
+        str = "string";
+        var res = a * str;
+        console.log(res, typeof (res), isNaN(res));
+
+        var yes = true; // логический тип данных
+        yes = false;
+
+        console.log("test" / 0);
+        var divideByZero = 1 / 0;
+        console.log(divideByZero, typeof (divideByZero), isFinite(divideByZero));
+
+        /*yes = confirm("Собирается дождь?");
+        if (yes) { // если правда, то
+            alert("Нужно взять зонт");
+        } else { // иначе
+            alert("Поеду на дачу");
+        }
+        console.log(yes, typeof (yes));*/
+
+        //var name = prompt("Как тебя зовут?");
+        //alert("Привет " + name);
+        //document.write("<strong>Привет</strong> " + name);
+
+        var age = prompt("Введите свой возраст?");
+        if (age != null) {
+            console.log(typeof (age), age);
+            age = parseInt(age);
+            if (age < 18) {
+                document.write("Тебе пора смотреть мультики");
+            } else if (age < 21) {
+                document.write("Пить алкоголь еще рано");
+            } else {
+                document.write("Можно заниматься развратом");
+            }
+            age = age + 5;
+            document.write("<br/> В 2025 году тебе будет " + age + " лет");
+
+        } else {
+            alert("Возраст не был задан");
+        }
+    </script>
 </body>
 
 </html>

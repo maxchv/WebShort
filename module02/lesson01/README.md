@@ -1,6 +1,6 @@
 # Введение в JavaScript
 
-* Видео занятия: [Смотреть на youtube]() 
+* Видео занятия: [Смотреть на YouTube](https://youtu.be/lQsuHIubV8Q) 
 * Демонстрация с занятия: [Открыть](https://github.com/maxchv/WebShort/tree/master/module02/lesson01/demo)
 * Учебные материалы: [Введение](unit01.pdf), [Условия](unit02.pdf), [Циклы](unit03.pdf), [Функции](unit04.pdf), [Рекурсия](unit05.pdf)
 * Практическое задание: [Открыть](practice.pdf)
