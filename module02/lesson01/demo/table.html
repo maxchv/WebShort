@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-size: 1.2rem;
+        }
+
+        #table {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+        }
+
+        div {
+            border: 1px solid;
+            text-align: center;
+        }
+
+        div div:nth-child(odd) {
+            background: yellow;
+            color: rgb(104, 104, 241);
+        }
+
+        div div:nth-child(even) {
+            background: rgb(104, 104, 241);
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="table">
+        <script>
+            for (let i = 0; i < 10; i++) {
+                for (let j = 0; j < 10; j++) {
+                    document.writeln(`<div>${(i+1)*(j+1)}</div>`);
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>

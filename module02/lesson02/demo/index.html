@@ -8,7 +8,123 @@
 </head>
 
 <body>
+    <h1>Условия, тернарный оператор, циклы, функции, массивы, строки, введение в объекты</h1>
+    <script>
+        // let monthNumber = prompt("Укажите номер дня недели", 1);
+        // monthNumber = parseInt(monthNumber);
+        // switch (monthNumber) {
+        //     case 1:
+        //     case "1":
+        //         document.write("Понедельник");
+        //         break;
+        //     case 2:
+        //     case "2":
+        //         document.write("Вторник");
+        //         break;
+        //     case 3:
+        //     case "3":
+        //         document.write("Среда");
+        //         break;
+        //     case 4:
+        //     case "4":
+        //         document.write("Четверг");
+        //         break;
+        //     case 5:
+        //     case "5":
+        //         document.write("Пятница");
+        //         break;
+        //     case 6:
+        //     case "6":
+        //         document.write("Суббота");
+        //         break;
+        //     case 7:
+        //     case "7":
+        //         document.write("Воскресенье");
+        //         break;
+        //     default:
+        //         document.write("Ошибка ввода");
+        //         break;
+        // }
+        /*if (monthNumber == 1) {
+             document.write("Понедельник");
+         } else if (monthNumber == 2) {
+             document.write("Вторник");
+         } else if (monthNumber == 3) {
+             document.write("Среда");
+         } else if (monthNumber == 4) {
+             document.write("Четверг");
+         } else if (monthNumber == 5) {
+             document.write("Пятница");
+         } else if (monthNumber == 6) {
+             document.write("Суббота");
+         } else if (monthNumber == 7) {
+             document.write("Воскресенье");
+         } else {
+             document.write("Ошибка ввода");
+         }*/
 
+        // == != > < >= <=
+        // ! && ||
+
+        //let hour = prompt("Который сейчас час?");
+        //hour = parseInt(hour);
+        const now = new Date();
+        // document.write(now.toLocaleTimeString("UK"));
+        const hour = now.getHours();
+
+        if (hour > 6 && hour <= 12) { // 6..12 утро
+            document.write("Доброе утро");
+        } else if (hour > 12 && hour <= 16) { // 12..16 день
+            document.write("Добрый день");
+        } else if (hour > 16 && hour <= 23) { // 16..23 вечер
+            document.write("Добрый вечер");
+        } else { // ночь
+            document.write("Доброй ночи");
+        }
+
+        // Циклы
+        // while, do..while, for, for..of, for..in
+        document.write("<ul>");
+        //let count = 0;
+        /*while (count < 5) {
+            count = count + 1;
+            // document.write("<li>item " + count + "</li>");
+            document.write(`<li>item ${count} </li>`);
+        }*/
+        for (let count = 5; count >= 0; count--) {
+            document.write(`<li>item ${count} </li>`);
+        }
+        document.write("</ul>");
+
+        /*let num;
+        do {
+            num = parseInt(prompt("Введите число от 0 до 10"));
+        } while (num < 0 || num > 10 || isNaN(num));
+
+        document.write(`Вы ввели число: ${num}`);*/
+
+        // Функции
+        // объявление функции
+        function hello(message) {
+            //alert(message);
+            document.writeln(message);
+        }
+
+        // вызов функции
+        hello("Hi function");
+
+        function area(r) {
+            return Math.PI * r * r;
+        }
+
+        let r = prompt("Введите радиус окружности");
+        let a = area(r);
+        hello(`Площадь: ${a}`);
+
+        // Массивы
+
+        // Объект
+    </script>
 </body>
 
 </html>
