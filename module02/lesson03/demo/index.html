@@ -5,6 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,22 +70,130 @@
             <h2>Объекты</h2>
             <p>Ассоциативные массивы. В качестве индекса объекта могут быть использованы не только индексы</p>
             <script>
-                student = {
+                // let print = function () {
+                //     document.writeln(`<p>Student: ${this.firstName} 
+                //         age ${this.age}</p>`);
+                // };
+
+                vasja = {
                     firstName: "Вася",
-                    age: 23
+                    age: 23,
+                    print: function () {
+                        document.writeln(`<p>Student: ${this.firstName} 
+                        age ${this.age}</p>`);
+                    }
                 };
+
+                masha = {
+                    firstName: "Маша",
+                    age: 19,
+                    print: function () {
+                        document.writeln(`<p>Student: ${this.firstName} 
+                        age ${this.age}</p>`);
+                    }
+                }
+
+                // vasja.foo = foo;
+                // masha.foo = foo;
+                vasja.print();
+                masha.print();
+
                 // document.writeln(student["firstName"]);
-                document.writeln(student.firstName);
+                document.writeln(vasja.firstName);
                 document.writeln("<br/>");
-                document.writeln(student.age);
+                document.writeln(vasja.age);
                 document.writeln("<br/>");
-                student.lastName = "Пупкин";
-                document.writeln(student);
+                vasja.lastName = "Пупкин";
+
+                /*
+                Создать массив, описывающий чек в магазине. 
+                Каждый элемент массива состоит из
+                названия товара, количество и цены за единицу товара.
+                
+                Написать следующие функции:
+                1. Распечатка чека на экран
+                2. Подсчет общей суммы покупки.
+                3. Получение самой дорогой покупки в чеке.
+                4. Подсчет средней стоимости одного товара в чеке.
+                */
+                let check = [];
+
+                // конструктор объекта
+                function Product(name, count, price) {
+                    this.name = name;
+                    this.count = count;
+                    this.price = price;
+                }
+
+                Product.prototype.fullPrice = function () {
+                    return this.count * this.price;
+                };
+
+                let eggs = new Product("Яйца", 10, 2);
+                // {
+                //     name: "Яйца",
+                //     count: 10,
+                //     price: 2
+                // };
+                check.push(eggs);
+                check.push(new Product("Молоко", 1, 28));
+                //     {
+                //     name: "Молоко",
+                //     count: 1,
+                //     price: 28
+                // });
+                check.push(new Product("Колбаса", 0.3, 160));
+                //     {
+                //     name: "Колбаса",
+                //     count: 0.3,
+                //     price: 160
+                // });
+
+                function printCheck(check) {
+                    document.writeln("<table>");
+                    document.writeln("<thead>");
+                    document.writeln("<tr>");
+                    document.writeln("<th>#</th>");
+                    document.writeln("<th>Название</th>");
+                    document.writeln("<th>Цена</th>");
+                    document.writeln("<th>Количество</th>");
+                    document.writeln("</tr>");
+                    document.writeln("</thead>");
+                    document.writeln("<tbody>");
+                    for (let i = 0; i < check.length; i++) {
+                        let item = check[i];
+                        document.writeln("<tr>");
+                        document.writeln(`<td>${i+1}</td>`);
+                        document.writeln(`<td>${item.name}</td>`);
+                        document.writeln(`<td>${item.price}</td>`);
+                        document.writeln(`<td>${item.count}</td>`);
+                        document.writeln("</tr>");
+                    }
+                    document.writeln("</tbody>");
+                    document.writeln("</table>");
+                }
+
+                //printCheck(check);
+
+                function sumCheck(check) {
+                    let s = 0;
+                    for (let item of check) {
+                        s += item.fullPrice(); //item.price * item.count;
+                    }
+                    return s;
+                }
+                let sum = sumCheck(check);
+                document.writeln("Общая сумма чека: " + sum);
+
+                let arr = [1, 2, 3, 3, 7, 1, 2, 9, 3];
+                document.write("Maximum: " + Math.max(...arr));
             </script>
         </section>
 
         <section>
             <h2>DOM - Объектная модель документа</h2>
+
+            <button onclick="printCheck(check)">Show check</button>
         </section>
 
         <section>
