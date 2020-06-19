@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Tutorial 1: Accessing the DOM</title>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/prettify.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/translate.css" />
+
+    <script src="js/ga.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/1.js" type="text/javascript"></script>
+    <script src="js/prettify.js" type="text/javascript"></script>
+    <script src="js/codemirror.js" type="text/javascript"></script>
+    <script src="js/matchbrackets.js" type="text/javascript"></script>
+    <script src="js/javascript.js" type="text/javascript"></script>
+    <script src="js/translate.js" type="text/javascript"></script>
+    <script src="js/open_all.js"></script>
+</head>
+
+<body>
+    <form name="language">
+        <select name="current">
+            <option>en</option>
+            <option selected>ru</option>
+        </select>
+    </form>
+    <h1 lang="en" hidden="hidden">Tutorial 1: Accessing the DOM</h1>
+    <h1 lang="ru" hidden="hidden">Урок 1: Доступ к Объектной модели документа (Document Object Model)</h1>
+
+    <p lang="en" hidden="hidden">
+        This tutorial will teach you how to access the DOM from JavaScript.
+        Basic knowledge of JavaScript and HTML is assumed.
+        There are five short lessons, followed by one exercise.
+    </p>
+    <p lang="ru" hidden="hidden">
+        В этом учебнике вы научитесь работать Объектной моделью документа (DOM) через JavaScript.
+        Предполагается, что вы уже имеете базовые знания JavaScript и HTML.
+        Вам предстоит выполнить пять коротких упражнений и одно практическое задание.
+    </p>
+
+    <p lang="en" hidden="hidden">
+        <img src="warning.png" style="float: left; margin-right: 1em" height="28" width="30">
+        It is highly recommended that you open your browser's JavaScript console now.
+        When stuff doesn't work, there's usually an error printed in the console.
+        The console is your friend.
+    </p>
+    <p lang="ru" hidden="hidden">
+        <img src="warning.png" style="float: left; margin-right: 1em" height="28" width="30">
+        Настоятельно рекомендуется открыть консоль JavaScript в браузере (нажмите кнопку <kbd>F12</kbd> на клавиатуре).
+        Если что-то не работает, то ошибки обычно выводятся в консоль.
+        Таким образом, консоль - ваш друг.
+    </p>
+
+    <p lang="en" hidden="hidden"><button onclick="Tutorial.showDiv('section1', this)">Start Lesson 1 ↓</button></p>
+    <p lang="ru" hidden="hidden"><button onclick="Tutorial.showDiv('section1', this)">Начать упражнение 1 ↓</button></p>
+
+    <div id="section1" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 1: getElementById</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 1: Получение элемента по его идентификатору (id) через метод
+            getElementById
+        </h2>
+
+        <p lang="en" hidden="hidden">
+            Finding a node on a page is the most fundamental task when working
+            with the DOM from JavaScript. The most useful function is
+            <code>document.getElementById('elementId')</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/document.getElementById">[?]</a></small></sup>.
+            This function takes a string and returns the DOM element with that ID.
+        </p>
+        <p lang="ru" hidden="hidden">
+            Поиск узла на странице это одна из основных задач при работе
+            с DOM из JavaScript. Наиболее полезная функция
+            <code>document.getElementById('elementId')</code><sup><small>
+                    <a target="help"
+                        href="https://learn.javascript.ru/searching-elements-dom#document-getelementbyid-ili-prosto-id">[?]</a></small></sup>.
+            Эта функция получает строку и возвращает DOM элемент с указанным идентификатором <code>'elementId'</code>.
+        </p>
+
+        <p><span lang="en" hidden="hidden">Here is an image of a star:</span>
+            <span lang="ru" hidden="hidden">Это изображение звездочки:</span>
+            &nbsp; <img id="star" src="star_off.gif"></p>
+
+        <p lang="en" hidden="hidden">This is the DOM tree for the above image:</p>
+        <p lang="ru" hidden="hidden">Это дерево DOM для указанной картинки:</p>
+
+        <pre
+            class="prettyprint"><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"star"</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span></pre>
+        <p lang="en" hidden="hidden">
+            Write some JavaScript code below that finds the above image element using
+            <code>getElementById</code>, then sets the element's
+            <code>src</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/HTMLImageElement">[?]</a></small></sup>
+            property so that the star becomes on. There is a 'star_on.gif' image on this server.
+        </p>
+        <p lang="ru" hidden="hidden">
+            Напишите JavaScript код для поиска элемента картинка (img) используя функцию
+            <code>getElementById</code>, потом установите для этого элемента атрибут
+            <code>src</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/ru/docs/Web/API/HTMLImageElement">[?]</a></small></sup>
+            так, что бы звезда была включена. На сервере есть картинка с именем 'star_on.gif'.
+        </p>
+
+        <p>
+            <textarea id="code1"></textarea><br>
+            <button id="execute1" onclick="Tutorial.checkStarOn(1) &amp;&amp; Tutorial.execute(1)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution1', this)" id="giveup1">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Посмотреть ответ</span>
+            </button>
+        </p>
+        <div id="solution1" class="solution">
+            <fieldset>
+                <legend lang="en" hidden="hidden">Sample solution</legend>
+                <legend lang="ru" hidden="hidden">Решение</legend>
+                <code class="prettyprint"><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span class="str">'star'</span><span
+                        class="pun">).</span><span class="pln">src </span><span class="pun">=</span><span class="pln">
+                    </span><span class="str">'star_on.gif'</span><span class="pun">;</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section2', this)">
+                    <span lang="en" hidden="hidden">Start Lesson 2 ↓</span>
+                    <span lang="ru" hidden="hidden">Начать упражнение 2 ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <div id="section2" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 2: childNodes</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 2: поиск дочерних элементов используя childNodes</h2>
+        <p lang="en" hidden="hidden">
+            Sometimes the node you want to manipulate does not have an ID.
+            This is particularly true of text nodes, which can't have IDs.
+            But there may still be ways to find a node that doesn't have an ID. Each node has a
+            <code>childNodes</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/Node.childNodes">[?]</a></small></sup>
+            property that contains an ordered array of all its children. One can index into this array.
+        </p>
+        <p lang="ru" hidden="hidden">
+            Иногда узлы, которыми необходимо манипулировать, не имеют идентификаторов.
+            Это, в частности, справедливо для текстовых узлов, которые не могут иметь идентификаторов.
+            Но все же существует способ найти узел для которого не установлен атрибут <code>id</code>.
+            Каждый узел имеет
+            <code>childNodes</code><sup><small><a target="help"
+                        href="https://learn.javascript.ru/dom-navigation">[?]</a></small></sup>
+            свойство которое содержит упорядоченный массив всех дочерних элементов:
+            <br />
+            <img src="https://learn.javascript.ru/article/dom-navigation/dom-links.svg" alt="" width="420" height="388">
+            <br />
+            Таким образом можно перебрать индексы этого массива.
+        </p>
+
+        <p>
+            <span lang="en" hidden="hidden">Here is a span containing three stars:</span>
+            <span lang="ru" hidden="hidden">Вы видите элемент <code>span</code>, который содержит три звезды:</span>
+            &nbsp; <span id="stars"><img src="star_off.gif"><img src="star_off.gif"><img src="star_off.gif"></span>
+        </p>
+
+        <p lang="en" hidden="hidden">This is the DOM tree for the above span:</p>
+        <p lang="ru" hidden="hidden">Дерево DOM для указанного выше <code>span</code>:</p>
+        <pre class="prettyprint"><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"stars"</span><span class="tag">&gt;</span><span class="pln">
+┣ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+┣ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+┗ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;/span&gt;</span></pre>
+        <p lang="en" hidden="hidden">
+            Write some JavaScript code below that finds the above span element using
+            <code>getElementById</code>, finds the middle star using <code>childNodes</code>,
+            then sets the element's <code>src</code> property so that the star becomes 'on'.
+            The other two stars should be 'off'.
+            Remember that arrays in JavaScript start with index 0.
+        </p>
+
+        <p lang="ru" hidden="hidden">
+            Напишите JavaScript код для поиска элемента <code>span</code> используя функцию
+            <code>getElementById</code>, затем нужно найти среднюю звезду используя <code>childNodes</code>,
+            затем нужно установить свойство <code>src</code> для этого элемента что бы звезда была включена ('on').
+            Остальные две звезды должны быть выключены ('off').
+            Помните, что массивы в JavaScript начинаются с индекса 0.
+        </p>
+
+        <p>
+            <textarea id="code2"></textarea><br>
+            <button id="execute2" onclick="Tutorial.resetSection2(); Tutorial.execute(2)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution2', this)" id="giveup2">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Показать ответ</span>
+            </button>
+        </p>
+
+        <div id="solution2" class="solution">
+            <fieldset>
+                <legend>
+                    <span lang="en" hidden="hidden">Sample solution</span>
+                    <span lang="ru" hidden="hidden">Решение</span>
+                </legend>
+                <code class="prettyprint"><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span class="str">'stars'</span><span
+                        class="pun">).</span><span class="pln">childNodes</span><span class="pun">[</span><span
+                        class="lit">1</span><span class="pun">].</span><span class="pln">src </span><span
+                        class="pun">=</span><span class="pln"> </span><span class="str">'star_on.gif'</span><span
+                        class="pun">;</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section3', this)">
+                    <span lang="en" hidden="hidden">Start Lesson 3 ↓</span>
+                    <span lang="ru" hidden="hidden">Начать упражнение 3 ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <div id="section3" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 3: firstChild &amp; lastChild</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 3: поиск дочерних элементов через атрибуты firstChild &amp; lastChild
+        </h2>
+
+        <p>
+            <span lang="en" hidden="hidden">There's a shortcut for finding the first and last child nodes,</span>
+            <span lang="ru" hidden="hidden">Существует способ быстрого поиска первого и последнего дочернего
+                узлов,</span>
+            <code>firstChild</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/ru/docs/Web/API/Node/firstChild">[?]</a></small></sup>
+            <span lang="en" hidden="hidden">and</span>
+            <span lang="ru" hidden="hidden">и</span>
+            <code>lastChild</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/ru/docs/Web/API/Node/lastChild">[?]</a></small></sup>.
+        </p>
+
+        <p>
+            <span lang="en" hidden="hidden">Here is a phrase with a star:</span>
+            <span lang="ru" hidden="hidden">Вот фраза со звездой:</span>
+            &nbsp;
+            <span id="phrase">Twinkle twinkle little <u><img src="star_off.gif"> star.</u></span>
+        </p>
+        <p lang="en" hidden="hidden">This is the DOM tree for the above span:</p>
+        <p lang="ru" hidden="hidden">Это дерево DOM для указанного выше <code>span</code>:</p>
+        <pre class="prettyprint"><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"phrase"</span><span class="tag">&gt;</span><span class="pln">
+┣ Twinkle twinkle little
+┗ </span><span class="tag">&lt;u&gt;</span><span class="pln">
+  ┣ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+  ┗ star
+  </span><span class="tag">&lt;/u&gt;</span><span class="pln">
+</span><span class="tag">&lt;/span&gt;</span></pre>
+
+        <p lang="en" hidden="hidden">
+            Write some JavaScript code below that finds the above span element using
+            <code>getElementById</code>, finds the star using <code>firstChild</code> and/or <code>lastChild</code>,
+            then sets the element's <code>src</code> property so that the star becomes 'on'.
+        </p>
+        <p lang="ru" hidden="hidden">
+            Найдите <span>span</span> элемент используя функцию <code>getElementById</code>,
+            потом найдите звезду используя <code>firstChild</code> и/или <code>lastChild</code>,
+            затем установите свойство <code>src</code> элемента так, что бы звезда была включена ('on').
+        </p>
+
+        <p>
+            <textarea id="code3"></textarea><br>
+            <button id="execute3" onclick="Tutorial.execute(3)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution3', this)" id="giveup3">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Показать ответ</span>
+            </button>
+        </p>
+
+        <div id="solution3" class="solution">
+            <fieldset>
+                <legend lang="en" hidden="hidden">Sample solution</legend>
+                <legend lang="ru" hidden="hidden">Решение</legend>
+                <code class="prettyprint"><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span
+                        class="str">'phrase'</span><span class="pun">).</span><span class="pln">lastChild</span><span
+                        class="pun">.</span><span class="pln">firstChild</span><span class="pun">.</span><span
+                        class="pln">src </span><span class="pun">=</span><span class="pln"> </span><span
+                        class="str">'star_on.gif'</span><span class="pun">;</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section4', this)">
+                    <span lang="en" hidden="hidden">Start Lesson 4 ↓</span>
+                    <span lang="ru" hidden="hidden">Начать упражнение 4 ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <div id="section4" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 4: previousSibling &amp; nextSibling</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 4: поиск соседей используя previousSibling &amp; nextSibling</h2>
+        <p>
+            <span lang="en" hidden="hidden">Nodes also have</span>
+            <span lang="ru" hidden="hidden">Узлы также имеют</span>
+            <code>previousSibling</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/ru/docs/Web/API/Node/previousSibling">[?]</a></small></sup>
+            <span lang="en" hidden="hidden">and</span>
+            <span lang="ru" hidden="hidden">и</span>
+            <code>nextSibling</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/ru/docs/Web/API/Node/nextSibling">[?]</a></small></sup>
+            <span lang="en" hidden="hidden">properties that allow one to slide sideways on the DOM tree.</span>
+            <span lang="ru" hidden="hidden">свойства, которые позволяют перемещаться в по дереву DOM на этом
+                уровне.</span>
+        </p>
+
+        <p>
+            <span lang="en" hidden="hidden">Here is another span containing three stars:</span>
+            <span lang="ru" hidden="hidden">Вот другой <code>span</code>, который содержит три звезды:</span>
+            &nbsp;
+            <span><img src="star_off.gif"><img src="star_off.gif"><img id="laststar"
+                    src="star_off.gif"><span></span></span>
+        </p>
+        <p lang="en" hidden="hidden">This is the DOM tree for the above span:</p>
+        <p lang="ru" hidden="hidden">Это дерево DOM для указанного выше <code>span</code>:</p>
+        <pre class="prettyprint"><span class="tag">&lt;span&gt;</span><span class="pln">
+┣ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+┣ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+┗ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"laststar"</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;/span&gt;</span></pre>
+        <p lang="en" hidden="hidden">
+            Write some JavaScript code below that finds the last star, then walks back
+            to turn the first star 'on'. The other two stars should be 'off'.
+        </p>
+        <p lang="ru" hidden="hidden">Найдите последнюю звезду, потом переститесь назад для включения ('on') первой
+            звезды.
+            Остальные две звезды должны быть выключены ('off').</p>
+
+        <p>
+            <textarea id="code4"></textarea><br>
+            <button id="execute4" onclick="Tutorial.resetSection4(); Tutorial.execute(4)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution4', this)" id="giveup4">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Показать ответ</span>
+            </button>
+        </p>
+
+        <div id="solution4" class="solution">
+            <fieldset>
+                <legend lang="en" hidden="hidden">Sample solution</legend>
+                <legend lang="ru" hidden="hidden">Решение</legend>
+                <code class="prettyprint"><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span
+                        class="str">'laststar'</span><span class="pun">).</span><span
+                        class="pln">previousSibling</span><span class="pun">.</span><span
+                        class="pln">previousSibling</span><span class="pun">.</span><span class="pln">src </span><span
+                        class="pun">=</span><span class="pln"> </span><span class="str">'star_on.gif'</span><span
+                        class="pun">;</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section5', this)">
+                    <span lang="en" hidden="hidden">Start Lesson 5 ↓</span>
+                    <span lang="ru" hidden="hidden">Начать упражнение 5 ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+
+    <div id="section5" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 5: parentNode</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 5: поиск родительских элементов через parentNode</h2>
+        <p>
+            <span lang="en" hidden="hidden">The last DOM-walking property is</span>
+            <span lang="ru" hidden="hidden">Последнее свойство для поиска DOM элементов </span>
+            <code>parentNode</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/ru/docs/Web/API/Node/parentNode">[?]</a></small></sup>.
+            <span lang="en" hidden="hidden">As might be expected, this returns the node that encloses the current
+                node.</span>
+            <span lang="ru" hidden="hidden">Как можно ожидать, он возвращает тот узел в который вложен текущий
+                узел.</span>
+        </p>
+
+        <p>
+            <span lang="en" hidden="hidden">Here is a more complex snippet:</span>
+            <span lang="ru" hidden="hidden">Вот более сложный пример:</span>
+            &nbsp;
+            <span><b><small id="start_here">Twinkle </small></b><i>twinkle little <img src="star_off.gif"></i></span>
+        </p>
+
+        <p lang="en" hidden="hidden">This is the DOM tree for the above span:</p>
+        <p lang="ru" hidden="hidden">Это дерево DOM для указанного выше <code>span</code>:</p>
+        <pre class="prettyprint"><span class="tag">&lt;span&gt;</span><span class="pln">
+┣ </span><span class="tag">&lt;b&gt;</span><span class="pln">
+┃ ┗ </span><span class="tag">&lt;small</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"start_here"</span><span class="tag">&gt;</span><span class="pln">
+┃   ┗ Twinkle
+┃   </span><span class="tag">&lt;/small&gt;</span><span class="pln">
+┃ </span><span class="tag">&lt;/b&gt;</span><span class="pln">
+┗ </span><span class="tag">&lt;i&gt;</span><span class="pln">
+  ┣ twinkle little
+  ┗ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/i&gt;</span><span class="pln">
+</span><span class="tag">&lt;span&gt;</span></pre>
+        <p lang="en" hidden="hidden">
+            Write some JavaScript code below that starts with the <code>small</code> tag,
+            then walks to the star and turns it 'on'.<br>
+            Bonus: Not counting <code>getElementById</code> and <code>src</code>, can you do it in only three steps?
+        </p>
+        <p lang="ru" hidden="hidden">
+            Найдите элементе с тегом <code>small</code>, затем перейти к звезде и включите ее ('on').<br>
+            Бонус: Не считая применения метода <code>getElementById</code> и <code>src</code>, можете сделать это только
+            в три шага?
+        </p>
+
+        <p>
+            <textarea id="code5"></textarea><br>
+            <button id="execute5" onclick="Tutorial.execute(5)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution5', this)" id="giveup5">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Посмотреть ответ</span>
+            </button>
+        </p>
+
+        <div id="solution5" class="solution">
+            <fieldset>
+                <legend>
+                    <span lang="en" hidden="hidden">Sample solution</span>
+                    <span lang="ru" hidden="hidden">Решение</span>
+                </legend>
+
+
+                <code class="prettyprint"><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span
+                        class="str">'start_here'</span><span class="pun">).</span><span
+                        class="pln">parentNode</span><span class="pun">.</span><span class="pln">nextSibling</span><span
+                        class="pun">.</span><span class="pln">lastChild</span><span class="pun">.</span><span
+                        class="pln">src </span><span class="pun">=</span><span class="pln"> </span><span
+                        class="str">'star_on.gif'</span><span class="pun">;</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section6', this)">
+                    <span lang="en" hidden="hidden">Start Exercise ↓</span>
+                    <span lang="ru" hidden="hidden">Начать практическое задание ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <div id="section6" class="section">
+        <h2 lang="en" hidden="hidden" class="remove">Exercise: Tree Walker</h2>
+        <h2 lang="ru" hidden="hidden">Практическое занятие: Tree Walker</h2>
+
+        <p lang="en" hidden="hidden" class="remove">
+            One final detail is that the <span><code>firstChild</code></span>,
+            <span><code>lastChild</code></span>, <span><code>previousSibling</code></span>,
+            <span><code>nextSibling</code></span>, and <span><code>parentNode</code></span>
+            properties return null if there is no such child, sibling or parent node.
+            Likewise, the <span><code>childNodes</code></span> array is of length zero if there are no
+            child nodes.
+        </p>
+
+        <p lang="ru" hidden="hidden">
+            Последнее замечание - свойства <span><code>firstChild</code></span>, <span><code>lastChild</code></span>,
+            <span><code>previousSibling</code></span>, <span><code>nextSibling</code></span>, и
+            <span><code>parentNode</code></span>
+            возвращают <code>null</code> если не найден дочерний, соседний или родительский узел.
+            Аналогично массив <span><code>childNodes</code></span> имеет нулевую длину (свойство length равно нулю) при
+            отсутствии дочерних узлов.
+        </p>
+
+        <p lang="en" hidden="hidden" class="remove">
+            You now know the API for navigating your way around any DOM tree.
+            For this exercise, put all these pieces together to write a function called
+            <span><code>nextNode</code></span> that can be used to walk through all the nodes of a DOM tree.
+            The function should take a node as an argument, and return the next node in
+            the tree. For example, the following loop would visit every node once, and
+            only once:
+        </p>
+
+        <p lang="ru" hidden="hidden">
+            Теперь вы знаете API для навигации по любому дереву DOM.
+            Для этого практического занятия соберите все эти кусочки знаний вместе для написания функции
+            <span><code>nextNode</code></span>, которая может быть использована для перемещения по всем узлам дерева
+            DOM.
+            Функция должна получать в качестве аргумент узел и возвращать следующий узел в дереве.
+            Например, следующий цикл будет проходить по каждому узлу лишь один раз:
+        </p>
+
+        <pre
+            class="prettyprint"><span class="pln">  </span><span class="kwd">var</span><span class="pln"> node </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">body</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">do</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    node </span><span class="pun">=</span><span class="pln"> nextNode</span><span class="pun">(</span><span class="pln">node</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(</span><span class="pln">node </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">)</span></pre>
+
+        <p lang="en" hidden="hidden" class="remove">
+            This is not an easy exercise, it requires careful thought.
+            Beware of infinite loops which may crash your browser.
+        </p>
+        <p lang="ru" hidden="hidden">
+            Это не простое практическое задание, оно требует тщательной проработки.
+            Остерегайтесь бесконечных циклов, которые могут привести к краху вашего обозревателя.
+        </p>
+
+        <p>
+            <textarea id="code6">
+                nextNode = function(node) {
+                //...Code goes here to walk to the next node...
+                return node;
+                };
+            </textarea><br>
+
+            <button id="testStep" onclick="Tutorial.testStep()">
+                <span lang="en" hidden="hidden">Execute single step</span>
+                <span lang="ru" hidden="hidden">Выполнить единственный шаг</span>
+            </button>
+            <button disabled="disabled" id="testReset" onclick="Tutorial.testReset()">
+                <span lang="en" hidden="hidden">Reset to start</span>
+                <span lang="ru" hidden="hidden">Сбросить на начало</span>
+            </button>
+        </p>
+
+        <p lang="en" hidden="hidden">
+            Test your <code>nextNode</code> function by repeatedly clicking the
+            "Execute single step" button. It will highlight each node in sequence,
+            starting with the title of this exercise. Elements (which correspond with HTML
+            tags) receive a green border, text nodes receive a green background.
+        </p>
+
+        <p lang="ru" hidden="hidden">Проверте вашу функцию <code>nextNode</code> повторно нажимая на кнопку "Выполнить
+            единственный шаг". При правильном решении будет подсвечиваться каждый узел в дереве, начиная с заголовка
+            этого практического задания. Элементы (которые соответствуют HTML тегам) будут иметь зеленую границу,
+            текстовые узлы будут иметь зеленый фон.</p>
+
+        <p lang="en" hidden="hidden">
+            Use the <a href="https://groups.google.com/d/forum/intro-to-javascript">
+                Intro
+                to JavaScript forum
+            </a> to share your solution to this exercise and see other
+            people's solutions.
+        </p>
+
+        <!-- <p lang="ru" hidden="hidden">
+            Посетите <a href="https://groups.google.com/d/forum/intro-to-javascript">
+                Форум Введение в
+                JavaScript
+            </a> для предоставление своего решения этого практического задания и для того, что бы посмотреть решение
+            других людей.
+        </p> -->
+    </div>
+
+    <hr>
+    <div class="balls"><img src="google_balls.jpg" height="68" width="101"></div>
+    <div class="footer">
+        ← <a href="https://dom-tutorials.appspot.com/static/index.html">JavaScript DOM Tutorials</a> - Google © 2012 -
+        Neil Fraser (fraser@google.com)
+        Translated to Russian by Shaptala Maxim &copy; (maxshaptala@gmail.com)
+    </div>
+
+    <script>
+        window.addEventListener('load', function () {
+            for (var i = 1; i <= 5; i++) {
+                var giveup = document.getElementById('giveup' + i);
+                if (giveup) {
+                    giveup.setAttribute("disabled", "disabled");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

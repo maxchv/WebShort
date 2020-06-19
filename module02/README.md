@@ -18,9 +18,23 @@
 * Работа с датой и математическими функциями
 * Понятие объект, атрибут объекта, метод
 
-## [3. Обработка событий](lesson03)
+## [3. DOM, BOM](lesson03)
 
-## [4. DOM, BOM](lesson04)
+* Browser Object Model
+  * window
+  * navigator
+  * screen
+  * location
+  * history
+* Document Object Model
+  * Типы узлов
+  * Методы поиска узлов
+  * Изменение дерева DOM
+  
+
+
+
+## [4. Обработка событий](lesson04)
 
 ## [5. JSON, Ajax](lesson05)
 
