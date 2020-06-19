@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 50px auto;
+            min-width: 500px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid;
+        }
+
+        ol {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        ol {
+            list-style-position: outside;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Code</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        const process = {
+            firebaseConfig: {
+                apiKey: 'AIzaSyBvR7BIHXwChpYp4AEKzEr2J5_9y_j3q3U',
+                authDomain: 'dom-tutorial.firebaseapp.com',
+                projectId: 'dom-tutorial'
+            },
+            init: function () {
+                firebase.initializeApp(this.firebaseConfig);
+                this.db = firebase.firestore();
+                this.listenUsers(this.db);
+                this.table = document.querySelector("tbody");
+            },
+            addUser: function (user, userId) {
+                const row = document.createElement("tr");
+                row.id = userId;
+                const td = document.createElement("td");
+                td.append(document.createTextNode(user.fullName));
+                row.append(td);
+                const codeTd = document.createElement("td");
+                codeTd.append(document.createElement("ol"));
+                row.append(codeTd);
+                this.table.prepend(row);
+            },
+            addAttempt: function (userId, data) {
+                const tr = document.querySelector(`#${userId}`);
+                const ol = tr.lastElementChild.firstElementChild;
+                const li = document.createElement("li");
+                li.append(document.createTextNode(
+                    `[${data.task}] ${data.code} (${data.timestamp.toDate().toLocaleString('UK')})`
+                ));
+                ol.prepend(li);
+            },
+            listenUsers: function (db) {
+                db.collection("users")
+                    .orderBy("timestamp")
+                    .onSnapshot(querySnapshot => {
+                        querySnapshot.docChanges().forEach(userChanges => {
+                            const user = userChanges.doc.data();
+                            const userId = userChanges.doc.id;
+                            this.addUser(user, userId);
+                            this.listenAttempt(userId, db.collection("users").doc(userId));
+                        });
+                    });
+            },
+            listenAttempt: function (userId, ref) {
+                ref.collection("tutorial1")
+                    .orderBy("timestamp")
+                    .onSnapshot(querySnapshot => {
+                        querySnapshot.docChanges().forEach(codeChanges => {
+                            const data = codeChanges.doc.data();
+                            this.addAttempt(userId, data);
+                            console.log(codeChanges.doc.id, data);
+                        });
+                    });
+            }
+        };
+
+        process.init();
+    </script>
+
+</body>
+
+</html>
