@@ -17,8 +17,8 @@
             <h2>Массивы</h2>
             <p>Набор данных по одним именем. К данным можно обратиться по индексу. Индекс начинается с 0</p>
             <script>
-                //               0        1       2
-                let student = ["Вася", "Маша", "Даша"]; // создаем массив на 3 элемента
+                //               0        1       2      3
+                let student = ["Вася", "Маша", "Даша", "Маша"]; // создаем массив на 3 элемента
                 // let name = prompt("Имя студента");
                 // student.push(name); // добавляем элемент в конец массива
                 // student.unshift(name); // добавляем элемент в начало массива
@@ -31,6 +31,18 @@
                 // for (let i = 0; i < student.length; i++) { // перебор элементов в цикле со счетчиком
                 //     document.write(`<p>${i+1}) ${student[i]}</p>`)
                 // }
+                // student[0] = prompt("Введите новое имя " + student[0]);
+                let oldName = "Маша"; //prompt("Кого нужно переименовать ? " + student);
+                let newName = "Степа"; //prompt("Как теперь зовут ? " + oldName);
+                let idx = -1;
+                do {
+                    idx = student.indexOf(oldName, idx + 1);
+                    console.log("found: " + idx);
+                    if (idx >= 0) {
+                        student[idx] = newName;
+                    }
+                } while (idx >= 0);
+
                 for (let item of student) { // перебор элементов через цикл for..of
                     document.write(`<p>${item}</p>`)
                 }
@@ -45,6 +57,20 @@
 
         <section>
             <h2>Объекты</h2>
+            <p>Ассоциативные массивы. В качестве индекса объекта могут быть использованы не только индексы</p>
+            <script>
+                student = {
+                    firstName: "Вася",
+                    age: 23
+                };
+                // document.writeln(student["firstName"]);
+                document.writeln(student.firstName);
+                document.writeln("<br/>");
+                document.writeln(student.age);
+                document.writeln("<br/>");
+                student.lastName = "Пупкин";
+                document.writeln(student);
+            </script>
         </section>
 
         <section>
