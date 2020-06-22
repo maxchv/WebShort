@@ -58,7 +58,7 @@ const process = {
                     const taskId = /\d+/.exec(parent.id)[0];
                     const code = document.querySelector(`#code${taskId}`).getValue();
                     console.log(taskId, code);
-                    ref.collection(`tutorial1`)
+                    ref.collection(tutorial || `tutorial1`)
                         .add({
                             task: taskId,
                             code: code,

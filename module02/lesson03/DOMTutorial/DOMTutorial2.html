@@ -1,0 +1,553 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial 2: Manipulating the DOM</title>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/prettify.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/2.css" />
+    <link rel="stylesheet" href="css/translate.css" />
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth__ru.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.css" />
+    <script>
+        var tutorial = 'tutorial2';
+    </script>
+    <script src="js/firebase.js"></script>
+
+    <script src="js/ga.js" async="" type="text/javascript"></script>
+    <script src="js/common.js"></script>
+    <script src="js/2.js"></script>
+    <script type="text/javascript" src="js/prettify.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/matchbrackets.js"></script>
+    <script src="js/javascript.js"></script>
+    <script src="js/translate.js" type="text/javascript"></script>
+    <script src="js/open_all.js"></script>
+</head>
+
+<body>
+    <form name="language">
+        <select name="current">
+            <option>en</option>
+            <option selected>ru</option>
+        </select>
+    </form>
+
+    <h1 lang="en" hidden="hidden">Tutorial 2: Manipulating the DOM</h1>
+    <h1 lang="ru" hidden="hidden">Тема 2: Манипулирование деревом DOM</h1>
+
+    <p lang="en" hidden="hidden">This tutorial will teach you how to manipulate the DOM from JavaScript. Knowledge of
+        how to access the DOM from JavaScript is assumed. There are five short lessons, followed by one exercise.</p>
+    <p lang="ru" hidden="hidden">Эта тема посвящена вопросам манипулирования дерева DOM через JavaScript. Для изучения
+        необходимы знания о получении доступа к дереву DOM через JavaScript. Здесь представлены пять коротких упражнений
+        и одно практическое занятие.</p>
+
+    <p lang="en" hidden="hidden"><img src="warning.png" style="float: left; margin-right: 1em" height="28" width="30">
+        It is highly recommended that you open your browser's JavaScript console now. When stuff doesn't work, there's
+        usually an error printed in the console. The console is your friend.</p>
+    <p lang="ru" hidden="hidden">
+        <img src="warning.png" style="float: left; margin-right: 1em" height="28" width="30">
+        Настоятельно рекомендуется открыть консоль JavaScript в браузере.
+        Если что-то не работает, то ошибки обычно выводятся в консоль.
+        Таким образом, консоль - ваш друг.
+    </p>
+
+    <p>
+        <button onclick="Tutorial.showDiv('section1', this)">
+            <span lang="en" hidden="hidden">Start Lesson 1 ↓</span>
+            <span lang="ru" hidden="hidden">Начать упражнение 1 ↓</span>
+        </button>
+    </p>
+
+    <div id="section1" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 1: innerHTML</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 1: innerHTML</h2>
+        <p lang="en" hidden="hidden">
+            The simplest way to to change the DOM is to assign some HTML to an element's
+            <code>innerHTML</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/element.innerHTML">[?]</a></small></sup>
+            property.
+            This will erase the element's current content and replace it with your own.
+        </p>
+        <p lang="ru" hidden="hidden">
+            Наиболее простой способ изменить DOM - это получить HTML элемента через свойство
+            <code>innerHTML</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/element.innerHTML">[?]</a></small></sup>.
+            Присваивая значения этому свойству приведет к замене текущего HTML содержимого элемента.
+        </p>
+
+        <p lang="en" hidden="hidden">E.g. <code>element.innerHTML = 'Hello&lt;br&gt;World'</code> </p>
+        <p lang="ru" hidden="hidden">
+            Например: <code>element.innerHTML = 'Здравствуй&lt;br&gt;Мир!'</code>
+        </p>
+
+        <p lang="en" hidden="hidden">
+            Here is a span which contains some text and an image: &nbsp;
+            <span id="field">Wish upon a <img src="star_off.gif"></span>
+        </p>
+        <p lang="ru" hidden="hidden">
+            Вот <code>span</code> который содержит некий текст и изображение: &nbsp;
+            <span id="field">Wish upon a <img src="star_off.gif"></span>
+        </p>
+
+        <p lang="en" hidden="hidden">This is the DOM tree for the above span:</p>
+        <p lang="ru" hidden="hidden">Вот дерево DOM для приведенного выше <code>span</code>:</p>
+        <pre class="prettyprint"><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"field"</span><span class="tag">&gt;</span><span class="pln">
+┣ Wish upon a
+┗ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_off.gif"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;/span&gt;</span></pre>
+
+        <p lang="en" hidden="hidden">Write some JavaScript code below that removes both the text and the star, and
+            replaces them with a star that's 'on'. There is a 'star_on.gif' image on this server.</p>
+        <p lang="ru" hidden="hidden">
+            Напишите JavaScript код внизу для замены текста и изображения выключенной звезды этого <code>span</code> на
+            изображение включенной звезды ('on').
+            Изображение 'star_on.gif' находится в этой директории.
+        </p>
+
+        <p>
+            <textarea id="code1"></textarea>
+            <br>
+            <button id="execute1" onclick="Tutorial.execute(1)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution1', this)" id="giveup1">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Посмотреть ответ</span>
+            </button>
+        </p>
+
+        <div id="solution1" class="solution">
+            <fieldset>
+                <legend>
+                    <span lang="en" hidden="hidden">Sample solution</span>
+                    <span lang="ru" hidden="hidden">Решение</span>
+                </legend>
+                <code class="prettyprint"><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span class="str">'field'</span><span
+                        class="pun">).</span><span class="pln">innerHTML </span><span class="pun">=</span><span
+                        class="pln"> </span><span class="str">'&lt;img src="star_on.gif"&gt;'</span><span
+                        class="pun">;</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section2', this)">
+                    <span lang="en" hidden="hidden">Start Lesson 2 ↓</span>
+                    <span lang="ru" hidden="hidden">Начать упражнение 2 ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <div id="section2" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 2: removeChild</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 2: removeChild</h2>
+
+        <p lang="en" hidden="hidden">
+            In the previous lesson we used <code>innerHTML</code>. <em>
+                Never use
+                <code>innerHTML</code> again.
+            </em> Although it is simple, fast and convenient, it opens a boat load of security holes, both obvious and
+            subtle. Trust us. The rest of this tutorial will examine the more complicated, but safe alternative.
+        </p>
+        <p lang="ru" hidden="hidden">
+            В предыдущем упражнении мы использовали свойство <code>innerHTML</code>. <em>Больше никогда не используйте
+                свойсвто <code>innerHTML</code>.</em> Не смотря на то, что это просто, быстро и удобно, это может
+            привести к проблемам с безопасностью, как явным так и скрытым. Доверяте нам. Остальную часть этого учебника
+            мы посвятим более сложным, но безопастным альтернативам.
+        </p>
+
+        <p lang="en" hidden="hidden">
+            Since destroying something is easier than building something, let's start by destroying a node. Every node
+            has a method
+            <code>removeChild</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/Node.removeChild">[?]</a></small></sup> that
+            takes as an argument the node that is to be destroyed. Note that this method needs to be called on the
+            offending node's parent.
+        </p>
+        <p lang="en" hidden="hidden">E.g. <code>node1.removeChild(node2)</code></p>
+
+        <p lang="ru" hidden="hidden">В связи с тем, что разрушать что-то проще, чем что-то строить, давайте начнем с
+            удаления узла. Каждый узел имеет метод <code>removeChild</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/Node.removeChild">[?]</a></small></sup>
+            который принимает в качестве аргумента узел которный должен быть удален. Отметим, что данный метод должен
+            вызываться в родительском элементе, который содержит удаляемый узел</p>
+        <p lang="ru" hidden="hidden">
+            Пример: <code>node1.removeChild(node2)</code><br />
+            Здесь <code>node1</code> - родительский элемент содержащий дочерний узел <code>node2</code>
+        </p>
+
+        <p lang="en" hidden="hidden">
+            Here is a span which contains some text and an image: &nbsp;
+            <span>Shooting <img id="fallenstar" src="star_on.gif"></span>
+        </p>
+        <p lang="ru" hidden="hidden">
+            Вот <code>span</code> который содержит некий текст и изображение звезды: &nbsp;
+            <span>Shooting <img id="fallenstar" src="star_on.gif"></span>
+        </p>
+
+        <p lang="en" hidden="hidden">This is the DOM tree for the above span:</p>
+        <p lang="ru" hidden="hidden">Вот дерево DOM для представленного выше элемента <code>span</code>:</p>
+
+        <pre class="prettyprint"><span class="tag">&lt;span&gt;</span><span class="pln">
+┣ Shooting
+┗ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"fallenstar"</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_on.gif"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;/span&gt;</span></pre>
+
+        <p lang="en" hidden="hidden">Write some JavaScript code below which deletes the star.</p>
+        <p lang="ru" hidden="hidden">Напишите JavaScript код внизу для удаления звезды.</p>
+
+        <p>
+            <textarea id="code2"></textarea>
+            <br>
+            <button id="execute2" onclick="Tutorial.checkInnerHTML(2) &amp;&amp; Tutorial.execute(2)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution2', this)" id="giveup2">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Посмотреть ответ</span>
+            </button>
+        </p>
+
+        <div id="solution2" class="solution">
+            <fieldset>
+                <legend lang="en" hidden="hidden">Sample solution</legend>
+                <legend lang="ru" hidden="hidden">Решение</legend>
+                <code class="prettyprint"><span class="kwd">var</span><span class="pln"> star </span><span
+                        class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span
+                        class="str">'fallenstar'</span><span class="pun">);</span><br><span class="pln">
+                        star</span><span class="pun">.</span><span class="pln">parentNode</span><span
+                        class="pun">.</span><span class="pln">removeChild</span><span class="pun">(</span><span
+                        class="pln">star</span><span class="pun">);</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section3', this)">
+                    <span lang="en" hidden="hidden">Start Lesson 3 ↓</span>
+                    <span lang="ru" hidden="hidden">Начать упражнение 3 ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <div id="section3" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 3: appendChild</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 3: appendChild</h2>
+
+        <p lang="en" hidden="hidden">
+            Nodes may be added as children of another node with the
+            <code>appendChild</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/Node.appendChild">[?]</a></small></sup>
+            method. This method is called on the new parent and takes the child as its argument. If the child you are
+            appending is an existing element in the DOM, it will be automatically removed from its existing location.
+            Any grandchildren will follow the child.
+        </p>
+        <p lang="en" hidden="hidden">E.g. <code>node1.appendChild(node2)</code></p>
+
+        <p lang="ru" hidden="hidden">Узлы могут быть добавлены как дочерние к другим узлам через метод
+            <code>appendChild</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/Node.appendChild">[?]</a></small></sup>. Этот
+            метод вызывается в родительском узле и принимает в качестве аргумента дочерний узел. Если добавляемый
+            дочерний узел существует в дереве DOM, то он будет автоматически удален с его текущего места (т.е.
+            происходит перемещение узла). Все вложенные дочерние узлы также будут перемещены.</p>
+        <p lang="ru" hidden="hidden">Пример: <code>node1.appendChild(node2)</code></p>
+
+        <p>
+            <span lang="en" hidden="hidden"> Here is a span which contains some text and an image:</span>
+            <span lang="ru" hidden="hidden"> Вот <code>span</code> который содержит текст и изображение включенной
+                звезды:</span>
+            &nbsp;
+            <span id="section3span"><span id="source">Here's a star: <img src="star_on.gif"></span> <span
+                    id="target">Move it here: </span></span>
+        </p>
+
+        <p lang="en" hidden="hidden">This is the DOM tree for the above spans:</p>
+        <p lang="ru" hidden="hidden">Это дерево DOM для указанных выше <code>span</code>:</p>
+        <pre class="prettyprint"><span class="tag">&lt;span&gt;</span><span class="pln">
+┣ </span><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"source"</span><span class="tag">&gt;</span><span class="pln">
+┃ ┣ Here's a star:
+┃ ┗ </span><span class="tag">&lt;img</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"star_on.gif"</span><span class="tag">&gt;</span><span class="pln">
+┃ </span><span class="tag">&lt;/span&gt;</span><span class="pln">
+┗ </span><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"target"</span><span class="tag">&gt;</span><span class="pln">
+  ┗ Move it here:
+  </span><span class="tag">&lt;/span&gt;</span><span class="pln">
+</span><span class="tag">&lt;/span&gt;</span></pre>
+
+        <p lang="en" hidden="hidden">Write some JavaScript code below which moves the star from 'source' to the end of
+            'target', without changing the text.</p>
+        <p lang="ru" hidden="hidden">Напишите JavaScript код внизу для перемещения звезды из 'source' в конец 'target'
+            без изменения текста.</p>
+
+        <p>
+            <textarea id="code3"></textarea>
+            <br>
+            <button id="execute3"
+                onclick="Tutorial.checkInnerHTML(3) &amp;&amp; Tutorial.checkRemoveChild(3) &amp;&amp; Tutorial.resetSection3() &amp;&amp; Tutorial.execute(3)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution3', this)" id="giveup3">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Посмотреть ответ</span>
+            </button>
+        </p>
+
+        <div id="solution3" class="solution">
+            <fieldset>
+                <legend lang="en" hidden="hidden">Sample solution</legend>
+                <legend lang="ru" hidden="hidden">Решение</legend>
+                <code class="prettyprint"><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span
+                        class="str">'target'</span><span class="pun">).</span><span class="pln">appendChild</span><span
+                        class="pun">(</span><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span
+                        class="str">'source'</span><span class="pun">).</span><span class="pln">lastChild</span><span
+                        class="pun">);</span></code>
+            </fieldset>
+            <p>
+                <button onclick="Tutorial.showDiv('section4', this)">
+                    <span lang="en" hidden="hidden">Start Lesson 4 ↓</span>
+                    <span lang="ru" hidden="hidden">Начать упражнение 4 ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+
+    <div id="section4" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 4: document.createTextNode</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 4: document.createTextNode</h2>
+
+        <p lang="en" hidden="hidden">
+            Creating a new text node is easy, use just call
+            <code>document.createTextNode('hello')</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/document.createTextNode">[?]</a></small></sup>
+        </p>
+        <p lang="ru" hidden="hidden">
+            Создание нового текстового узла - это просто, необходимо вызвать метод
+            <code>document.createTextNode('hello')</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/document.createTextNode">[?]</a></small></sup>
+        </p>
+        <p>
+            <span lang="en" hidden="hidden">Here is a span which contains a formula: </span>
+            <span lang="ru" hidden="hidden">Вот <code>span</code> в котором записана формула: </span>
+            &nbsp;
+            <span id="math">6 * 7 = </span>
+        </p>
+
+        <p lang="en" hidden="hidden">This is the DOM tree for the above span:</p>
+        <p lang="ru" hidden="hidden">Это дерево DOM для преведенного выше элемента <code>span</code>:</p>
+        <pre class="prettyprint"><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"math"</span><span class="tag">&gt;</span><span class="pln">
+┗ 6 * 7 =
+</span><span class="tag">&lt;/span&gt;</span></pre>
+        <p lang="en" hidden="hidden">Write some JavaScript code below which completes the equation.</p>
+        <p lang="ru" hidden="hidden">Напишите JavaScript код внизу для того, что бы в формуле появился ответ.</p>
+
+        <p>
+            <textarea id="code4"></textarea>
+            <br>
+            <button id="execute4" onclick="Tutorial.checkInnerHTML(4) &amp;&amp; Tutorial.execute(4)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution4', this)" id="giveup4">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Посмотреть ответ</span>
+            </button>
+        </p>
+
+        <div id="solution4" class="solution">
+            <fieldset>
+                <legend lang="en" hidden="hidden">Sample solution</legend>
+                <legend lang="ru" hidden="hidden">Решение</legend>
+                <code class="prettyprint"><span class="pln">document</span><span class="pun">.</span><span
+                        class="pln">getElementById</span><span class="pun">(</span><span class="str">'math'</span><span
+                        class="pun">).</span><span class="pln">appendChild</span><span class="pun">(</span><span
+                        class="pln">document</span><span class="pun">.</span><span
+                        class="pln">createTextNode</span><span class="pun">(</span><span class="str">'42'</span><span
+                        class="pun">));</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section5', this)">
+                    <span lang="en" hidden="hidden">Start Lesson 5 ↓</span>
+                    <span lang="ru" hidden="hidden">Начать упражнение 5 ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+
+    <div id="section5" class="section">
+        <h2 lang="en" hidden="hidden">Lesson 5: document.createElement</h2>
+        <h2 lang="ru" hidden="hidden">Упражнение 5: document.createElement</h2>
+
+        <p lang="en" hidden="hidden">
+            New elements are created by calling
+            <code>document.createElement('SPAN')</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/document.createElement">[?]</a></small></sup>
+            with the argument being the element's HTML tag name.
+        </p>
+        <p lang="en" hidden="hidden">Here is an empty span: &nbsp; <span id="sky"></span></p>
+
+        <p lang="ru" hidden="hidden">Новые элементы можно создать через метод
+            <code>document.createElement('SPAN')</code><sup><small><a target="help"
+                        href="https://developer.mozilla.org/en-US/docs/DOM/document.createElement">[?]</a></small></sup>
+            который принимает в качестве аргумента имя HTML тега.</p>
+        <p lang="ru" hidden="hidden">Вот пустой элемент <code>span</code>: &nbsp; <span id="sky"></span></p>
+
+        <p lang="en" hidden="hidden">This is the DOM tree for the above span:</p>
+        <p lang="ru" hidden="hidden">Это дерево DOM для указанного выше элемента <code>span</code>:</p>
+
+        <pre class="prettyprint"><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"sky"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;/span&gt;</span></pre>
+
+        <p lang="en" hidden="hidden">Write some JavaScript code below which creates an image, sets its 'src' property to
+            a star, and inserts it into the empty span.</p>
+        <p lang="ru" hidden="hidden">Напишите JavaScript код внизу который создает элемент изображение, устанавливает
+            значение аттрибута 'src' равное 'star_on.gif', и вставляет это изображение в пустой элемнт
+            <code>span</code>.</p>
+
+        <p>
+            <textarea id="code5"></textarea>
+            <br>
+            <button id="execute5" onclick="Tutorial.checkInnerHTML(5) &amp;&amp; Tutorial.execute(5)">
+                <span lang="en" hidden="hidden">Execute</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            &nbsp;
+            <button onclick="Tutorial.showDiv('solution5', this)" id="giveup5">
+                <span lang="en" hidden="hidden">See Answer</span>
+                <span lang="ru" hidden="hidden">Посмотреть ответ</span>
+            </button>
+        </p>
+
+        <div id="solution5" class="solution">
+            <fieldset>
+                <legend lang="en" hidden="hidden">Sample solution</legend>
+                <legend lang="ru" hidden="hidden">Решение</legend>
+                <code class="prettyprint"><span class="kwd">var</span><span class="pln"> img </span><span
+                        class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span
+                        class="pln">createElement</span><span class="pun">(</span><span class="str">'IMG'</span><span
+                        class="pun">);</span><br><span class="pln"> img</span><span class="pun">.</span><span
+                        class="pln">src </span><span class="pun">=</span><span class="pln"> </span><span
+                        class="str">'star_on.gif'</span><span class="pun">;</span><br><span class="pln">
+                        document</span><span class="pun">.</span><span class="pln">getElementById</span><span
+                        class="pun">(</span><span class="str">'sky'</span><span class="pun">).</span><span
+                        class="pln">appendChild</span><span class="pun">(</span><span class="pln">img</span><span
+                        class="pun">);</span></code>
+            </fieldset>
+
+            <p>
+                <button onclick="Tutorial.showDiv('section6', this)">
+                    <span lang="en" hidden="hidden">Start Exercise ↓</span>
+                    <span lang="ru" hidden="hidden">Начать практическое задание ↓</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+
+    <div id="section6" class="section">
+        <h2 lang="en" hidden="hidden">Exercise: Roller Coaster Text</h2>
+        <h2 lang="ru" hidden="hidden">Практическое задание: Roller Coaster Text</h2>
+
+        <p lang="en" hidden="hidden">You now know the API for manipulating a DOM tree. For this exercise, put all these
+            pieces together to write code that takes a string and renders it with undulating font sizes. Each letter
+            should be in its own 'span' tag, and each span's <code>.style.fontSize</code> property starts at '10px' and
+            increases by 5 pixels until the middle of the string is reached, before shrinking back to 10 pixels. Here is
+            an example:</p>
+        <p lang="ru" hidden="hidden">Теперь вы знаете прикладной програмный интерфейс (Application Program Interface или
+            API) для манипулирования DOM. Для выполнения этого практического задания используйте все приобретенные вами
+            знания написания кода который получает строку и преобразует ее в волнообразный вид. Каждая буква должна
+            находиться в отдельном 'span' теге, и свойство каждого <code>span</code> <code>.style.fontSize</code>
+            начинается с '10px' и увеличивается на 5 пикселей до середины строки, затем постепенно уменьшается снова до
+            10 пикселей. Вот пример:</p>
+
+        <div>
+            <span style="font-size: 10px;">D</span><span style="font-size: 15px;">o</span><span
+                style="font-size: 20px;">n</span><span style="font-size: 25px;">'</span><span
+                style="font-size: 30px;">t</span><span style="font-size: 35px;"> </span><span
+                style="font-size: 40px;">B</span><span style="font-size: 45px;">e</span><span style="font-size: 40px;">
+            </span><span style="font-size: 35px;">E</span><span style="font-size: 30px;">v</span><span
+                style="font-size: 25px;">i</span><span style="font-size: 20px;">l</span><span
+                style="font-size: 15px;">.</span>
+        </div>
+
+        <p lang="en" hidden="hidden">Below is an empty div with the id 'rollercoaster' which you can append to:</p>
+        <p lang="ru" hidden="hidden">Внизу пустой <code>div</code> элемент с идентификатором 'rollercoaster' в который
+            вы можете добавить модифицированный текст:</p>
+
+        <div id="rollercoaster" style="border: dotted 1px #888">&nbsp;</div>
+
+        <p>
+            <textarea id="code6">
+                var text = 'Hello World!'; var div = document.getElementById('rollercoaster');
+
+            </textarea>
+            <br>
+            <button id="testRun" onclick="Tutorial.checkInnerHTML(6) &amp;&amp; Tutorial.testRun()">
+                <span lang="en" hidden="hidden">Execute your code</span>
+                <span lang="ru" hidden="hidden">Выполнить</span>
+            </button>
+            <button id="testReset" onclick="Tutorial.testReset()">
+                <span lang="en" hidden="hidden">Empty the div</span>
+                <span lang="ru" hidden="hidden">Очистить div</span>
+            </button>
+        </p>
+        <p lang="en" hidden="hidden">Bonus: Try creating an undulating sine wave or shifting colours.</p>
+        <p lang="ru" hidden="hidden">Бонус: Попробуйте создать синусоидальной формы строку или разноцветную.</p>
+
+        <p lang="en" hidden="hidden">
+            Use the <a href="https://groups.google.com/d/forum/intro-to-javascript">
+                Intro
+                to JavaScript forum
+            </a> to share your solution to this exercise and see other people's solutions.
+        </p>
+    </div>
+    <!-- <p lang="ru" hidden="hidden">
+        Посетите <a href="https://groups.google.com/d/forum/intro-to-javascript">
+            Форум Введение в
+            JavaScript
+        </a> для предоставление своего решения этого практического задания и для того, что бы посмотреть решение других
+        людей.
+    </p> -->
+
+    <hr>
+    <div class="balls"><img src="google_balls.jpg" height="68" width="101"></div>
+    <div class="footer">
+        ← <a href="https://dom-tutorials.appspot.com/static/index.html">JavaScript DOM Tutorials</a> - Google © 2012 -
+        Neil Fraser (fraser@google.com)
+        Translated to Russian by Shaptala Maxim &copy; (maxshaptala@gmail.com)
+    </div>
+
+    <script>
+        window.addEventListener('load', function () {
+            for (var i = 1; i <= 5; i++) {
+                var giveup = document.getElementById('giveup' + i);
+                if (giveup) {
+                    giveup.setAttribute("disabled", "disabled");
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
