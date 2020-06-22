@@ -5,20 +5,38 @@ const process = {
         projectId: 'dom-tutorial'
     },
     init: function () {
-        do {
-            this.fullName = prompt("Введите свое ФИО");
-        } while (!this.fullName);
-        // Initialize Firebase
         firebase.initializeApp(this.firebaseConfig);
-        this.db = firebase.firestore();
-        this.register(this.db);
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log(user);
+                this.user = user;
+                this.db = firebase.firestore();
+                this.register(this.db);
+            } else {
+                location = 'login.html';
+            }
+        });
+
+        // do {
+        //     this.fullName = prompt("Введите свое ФИО");
+        // } while (!this.fullName);
+        // Initialize Firebase
+
+        //this.register(this.db);
     },
     register: function (db) {
-        db.collection("users").add({
-                fullName: this.fullName,
-                timestamp: new Date(),
+        db.collection("users")
+            .doc(this.user.uid)
+            .set({
+                fullName: this.user.displayName, //this.fullName,
+                email: this.user.email, //this.fullName,
+                lastSee: new Date(),
                 group: 'ATO SUMMER 2020'
-            })
+            });
+        db.collection("users")
+            .doc(this.user.uid)
+            .get()
             .then((docRef) => {
                 console.log("Register ID: ", docRef.id);
                 this.key = docRef.id;

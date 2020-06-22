@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth__ru.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.css" />
+
+</head>
+
+<body>
+
+    <div id="firebaseui-auth-container"></div>
+    <script>
+        const firebaseConfig = {
+            apiKey: 'AIzaSyBvR7BIHXwChpYp4AEKzEr2J5_9y_j3q3U',
+            authDomain: 'dom-tutorial.firebaseapp.com',
+            projectId: 'dom-tutorial'
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+        ui.start('#firebaseui-auth-container', {
+            signInSuccessUrl: 'http://127.0.0.1:5500/index.html',
+            signInOptions: [
+                // firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID
+            ]
+        });
+    </script>
+</body>
+
+</html>
