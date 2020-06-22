@@ -30,7 +30,7 @@
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
         ui.start('#firebaseui-auth-container', {
-            signInSuccessUrl: 'http://127.0.0.1:5500/index.html',
+            signInSuccessUrl: 'index.html',
             signInOptions: [
                 // firebase.auth.EmailAuthProvider.PROVIDER_ID,
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID
