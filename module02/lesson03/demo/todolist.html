@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <style>
+        body>div {
+            width: 300px;
+            margin: 50px auto;
+        }
+
+        li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <input />
+            <button>Add</button>
+        </div>
+        <div>
+            <ol></ol>
+        </div>
+    </div>
+    <script>
+        let input = document.querySelector("input");
+        let button = document.querySelector("button");
+        let ol = document.querySelector("ol");
+        button.addEventListener('click', function () {
+            let item = input.value;
+            // ol.innerHTML = `<li>${item}</li>`;
+            let li = document.createElement("li");
+            li.title = 'Для удаления нажми левой кнопкой мыши';
+            li.append(document.createTextNode(item));
+            ol.prepend(li);
+            input.value = "";
+        });
+        document.addEventListener('click', function (e) {
+            if (e.target.nodeName == 'LI') {
+                e.target.remove();
+            }
+        });
+    </script>
+</body>
+
+</html>
