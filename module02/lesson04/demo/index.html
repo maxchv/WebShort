@@ -5,6 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            border: 1px solid;
+            min-height: 100vh;
+        }
+
+        img {
+            width: 200px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -25,9 +38,51 @@
                 this.count++;
                 this.value = `Click: ${this.count}`;
             }
-            button.onclick = countUp;
+            button.ondblclick = countUp;
             button2.onclick = countUp;
         </script>
+        <section>
+            <div id="coord"></div>
+            <div id="down"></div>
+            <script>
+                document.body.onmousemove = function (e) {
+                    // console.dir(e);
+                    coord.innerHTML = `${e.type} X: ${e.clientX} Y: ${e.clientY}`;
+                };
+                document.body.onmousedown = function (e) {
+                    down.innerHTML = `${e.type}, button: ${e.button}, which: ${e.which}`;
+                }
+            </script>
+        </section>
+        <section>
+            <div>
+                <img src="img/truck.jpg" alt="" id="truck" />
+            </div>
+            <script>
+                // console.dir(truck);
+                let distance = 0;
+                document.body.onkeydown = function (e) {
+                    console.dir(e);
+                    switch (e.code) {
+                        case "ArrowRight":
+                            distance += 10;
+                            truck.style.transform = "scaleX(1)";
+                            break;
+                        case "ArrowLeft":
+                            distance -= 10;
+                            truck.style.transform = "scaleX(-1)";
+                            break;
+                        case "Space":
+                            setInterval(function () {
+                                distance += 10;
+                                truck.style.marginLeft = `${distance}px`;
+                            }, 100);
+                            break;
+                    }
+                    truck.style.marginLeft = `${distance}px`;
+                };
+            </script>
+        </section>
     </main>
 
 
