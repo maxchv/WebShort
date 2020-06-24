@@ -16,6 +16,18 @@
         img {
             width: 200px;
         }
+
+        input:first-child {
+            outline: red solid 2px;
+        }
+
+        input:last-child {
+            outline: green solid 2px;
+        }
+
+        li {
+            cursor: pointer;
+        }
     </style>
 
 </head>
@@ -38,6 +50,7 @@
                 this.count++;
                 this.value = `Click: ${this.count}`;
             }
+
             button.ondblclick = countUp;
             button2.onclick = countUp;
         </script>
@@ -58,10 +71,12 @@
             <div>
                 <img src="img/truck.jpg" alt="" id="truck" />
             </div>
+            <div id="info"></div>
             <script>
                 // console.dir(truck);
                 let distance = 0;
-                document.body.onkeydown = function (e) {
+                // document.body.onkeydown = function (e) {
+                document.body.addEventListener('keydown', function (e) {
                     console.dir(e);
                     switch (e.code) {
                         case "ArrowRight":
@@ -80,7 +95,41 @@
                             break;
                     }
                     truck.style.marginLeft = `${distance}px`;
-                };
+                });
+                // document.body.onkeydown = function (e) {
+                document.body.addEventListener('keydown', function (e) {
+                    info.innerHTML = `Distance: ${distance}px`;
+                });
+            </script>
+        </section>
+        <section>
+            <div>
+                <a href="http://itstep.dp.ua">Link</a>
+            </div>
+            <script>
+                let link = document.querySelector("a");
+                link.addEventListener('click', function (e) {
+                    e.preventDefault(); // запретить стандартное действие в браузере
+                    distance += 10;
+                    truck.style.transform = "scaleX(1)";
+                    truck.style.marginLeft = `${distance}px`;
+                });
+            </script>
+        </section>
+        <section>
+            <ul>
+                <li>item 1</li>
+                <li>item 2</li>
+                <li>item 3</li>
+                <li>item 4</li>
+                <li>item 5</li>
+            </ul>
+            <script>
+                let ul = document.querySelector("ul");
+                ul.addEventListener('click', function (e) {
+                    //this.style.background = "yellow";
+                    e.target.style.background = 'yellow';
+                });
             </script>
         </section>
     </main>
