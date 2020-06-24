@@ -8,10 +8,6 @@
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth__ru.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.css" />
 
     <style>
         table {
@@ -56,20 +52,13 @@
             },
             init: function () {
                 firebase.initializeApp(this.firebaseConfig);
-                firebase.auth().onAuthStateChanged((user) => {
-                    if (user) {
-                        console.log(user);
-                        this.db = firebase.firestore();
-                        this.listenUsers(this.db);
-                        this.table = document.querySelector("tbody");
-                    } else {
-                        location = 'login.html';
-                    }
-                });
+                this.db = firebase.firestore();
+                this.listenUsers(this.db);
+                this.table = document.querySelector("tbody");
             },
             addUser: function (user, userId) {
                 const row = document.createElement("tr");
-                row.id = userId;
+                row.id = '_' + userId;
                 const td = document.createElement("td");
                 td.append(document.createTextNode(user.fullName));
                 row.append(td);
@@ -79,7 +68,7 @@
                 this.table.prepend(row);
             },
             addAttempt: function (userId, data) {
-                const tr = document.querySelector(`#${userId}`);
+                const tr = document.querySelector(`#_${userId}`);
                 const ol = tr.lastElementChild.firstElementChild;
                 const li = document.createElement("li");
                 li.append(document.createTextNode(
@@ -89,18 +78,22 @@
             },
             listenUsers: function (db) {
                 db.collection("users")
-                    .orderBy("lastSee")
+                    .orderBy("timestamp")
                     .onSnapshot(querySnapshot => {
-                        querySnapshot.docChanges().forEach(userChanges => {
-                            const user = userChanges.doc.data();
-                            const userId = userChanges.doc.id;
-                            this.addUser(user, userId);
-                            this.listenAttempt(userId, db.collection("users").doc(userId));
-                        });
+                        querySnapshot
+                            .docChanges()
+                            .forEach(userChanges => {
+                                const user = userChanges.doc.data();
+                                const userId = userChanges.doc.id;
+                                this.addUser(user, userId);
+                                this.listenAttempt(userId, db
+                                    .collection("users")
+                                    .doc(userId));
+                            });
                     });
             },
             listenAttempt: function (userId, ref) {
-                ref.collection("tutorial1")
+                ref.collection("tutorial3")
                     .orderBy("timestamp")
                     .onSnapshot(querySnapshot => {
                         querySnapshot.docChanges().forEach(codeChanges => {
