@@ -70,7 +70,7 @@
                 <script>
                     let button = document.querySelector('button');
 
-                    // 1.
+                    // 1. Создать объект XMLHttpRequest
                     var xhr = new XMLHttpRequest();
                     // подготавливаем данные к запросу
 
@@ -91,7 +91,9 @@
 
                     xhr.onreadystatechange = function (e) {
                         console.log(xhr.readyState);
+                        // 3.
                         if (xhr.readyState == xhr.DONE) {
+                            // 4.
                             let str = xhr.responseText;
                             console.log(typeof (str));
                             let students = JSON.parse(str);
@@ -103,7 +105,7 @@
                     button.addEventListener('click', function () {
                         console.log('Send request');
                         // 2. GET - метод запроса (есть еще POST)
-                        //    url запроса
+                        //    url запроса - http://127.0.0.1:5500/students.json
                         //    async - выполнять асинхронный запрос
                         xhr.open('GET', 'http://127.0.0.1:5500/students.json', true);
                         xhr.send();

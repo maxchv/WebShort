@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body>div {
+            border: 3px solid gray;
+            margin: 50px auto;
+            width: 100px;
+            border-radius: 20px;
+            box-shadow: 2px 2px 2px gray;
+            padding: 5px;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <button id="load">Загрузить</button> -->
+    <div>
+        <img src="" alt="" id="icon" />
+        <div id="summary"></div>
+        <div><span id="temp"></span> ℃</div>
+        <div><span id="press"></span> Па</div>
+    </div>
+    <script>
+        const xhr = new XMLHttpRequest();
+        const proxy = 'https://cors-anywhere.herokuapp.com/';
+        // const url = "http://resources.finance.ua/ua/public/currency-cash.json";
+        const url =
+            "https://api.darksky.net/forecast/00ce670b3742a599df4c805e00fb6876/48.4671233,35.0290598?lang=uk&units=si";
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == xhr.DONE) {
+                let json = xhr.responseText;
+                // console.log(json);
+                let weather = JSON.parse(json);
+                console.log(weather);
+                summary.innerHTML = weather.currently.summary;
+                temp.innerHTML = weather.currently.temperature;
+                press.innerHTML = weather.currently.pressure;
+                icon.src = `https://darksky.net/images/weather-icons/${weather.currently.icon}.png`;
+            }
+        };
+
+        // load.addEventListener('click', function () {
+        xhr.open('GET', proxy + url, true);
+        xhr.send();
+        // });
+    </script>
+
+</body>
+
+</html>

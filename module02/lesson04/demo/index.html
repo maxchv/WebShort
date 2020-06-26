@@ -60,10 +60,22 @@
             <script>
                 document.body.onmousemove = function (e) {
                     // console.dir(e);
-                    coord.innerHTML = `${e.type} X: ${e.clientX} Y: ${e.clientY}`;
+                    coord.innerHTML = `X: ${e.clientX} Y: ${e.clientY}`;
                 };
                 document.body.onmousedown = function (e) {
-                    down.innerHTML = `${e.type}, button: ${e.button}, which: ${e.which}`;
+                    var btn;
+                    switch (e.button) {
+                        case 0:
+                            btn = 'Left';
+                            break;
+                        case 1:
+                            btn = 'Middle';
+                            break;
+                        case 2:
+                            btn = 'Right';
+                            break;
+                    }
+                    down.innerHTML = `${e.type}, button: ${btn}, which: ${e.which}`;
                 }
             </script>
         </section>
