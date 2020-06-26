@@ -1,0 +1,22 @@
+[{
+        "photo": "https://cdn0.iconfinder.com/data/icons/management-1/100/business-05-512.png",
+        "name": "Вася",
+        "age": 21,
+        "group": "ЕКО 19-П-1",
+        "marks": [12, 11, 9, 5, 2, 8]
+    },
+    {
+        "photo": "https://cdn4.iconfinder.com/data/icons/bussines-people/288/avatar-woman-512.png",
+        "name": "Маша",
+        "age": 19,
+        "group": "ЕКО 18-Г-1",
+        "marks": [6, 10, 9, 5, 9, 8]
+    },
+    {
+        "photo": "https://cdn0.iconfinder.com/data/icons/management-1/100/business-05-512.png",
+        "name": "Рома",
+        "age": 35,
+        "group": "WEB Summer 2020",
+        "marks": [10, 8, 5, 5, 7, 8]
+    }
+]

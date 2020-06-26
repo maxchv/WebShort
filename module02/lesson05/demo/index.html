@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON, AJAX</title>
+    <style>
+        table img {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JSON and AJAX</h1>
+    <main>
+        <section>
+            <header>
+                <h2>JSON - JavaScript Object Notation</h2>
+            </header>
+            <div>
+                <pre><code>{
+    "name": "Вася",
+    "age": 21,
+    "group": "ЕКО 19-П-1",
+    "marks": [12, 11, 9, 5, 2, 8]
+}</code></pre>
+                <script>
+                    var student = {
+                        name: "Вася",
+                        age: 21,
+                        group: "ЕКО 19-П-1",
+                        marks: [12, 11, 9, 5, 2, 8]
+                    };
+                    // JSON.stringify() - преобразовывает объект JS в JSON
+                    var jsonStudent = JSON.stringify(student);
+                    console.log(typeof (jsonStudent), jsonStudent);
+                    // JSON.parse() - обратное преобразование, т.е. из строки JSON в
+                    // объект JavaScript
+                    var obj = JSON.parse(jsonStudent);
+                    console.log(typeof (obj), obj);
+                </script>
+                <a href="https://www.json.org/json-ru.html">Формат данных JSON</a>
+            </div>
+        </section>
+        <section>
+            <header>
+                <h2>AJAX - Asynchronous JavaScript and XML</h2>
+            </header>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Group</th>
+                            <th>Average mark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button>Load</button>
+                <script>
+                    let button = document.querySelector('button');
+
+                    // 1.
+                    var xhr = new XMLHttpRequest();
+                    // подготавливаем данные к запросу
+
+                    let tbody = document.querySelector('tbody');
+
+                    function displayStudents(students) {
+                        for (let i = 0; i < students.length; i++) {
+                            tbody.innerHTML += `<tr>
+                                <td>${i+1}</td>
+                                <td><img src="${students[i].photo}"/></td>
+                                <td>${students[i].name}</td>
+                                <td>${students[i].age}</td>
+                                <td>${students[i].group}</td>
+                                <td>${students[i].marks}</td>
+                           </tr>`;
+                        }
+                    }
+
+                    xhr.onreadystatechange = function (e) {
+                        console.log(xhr.readyState);
+                        if (xhr.readyState == xhr.DONE) {
+                            let str = xhr.responseText;
+                            console.log(typeof (str));
+                            let students = JSON.parse(str);
+                            console.log(typeof (students), students);
+                            displayStudents(students);
+                        }
+                    };
+
+                    button.addEventListener('click', function () {
+                        console.log('Send request');
+                        // 2. GET - метод запроса (есть еще POST)
+                        //    url запроса
+                        //    async - выполнять асинхронный запрос
+                        xhr.open('GET', 'http://127.0.0.1:5500/students.json', true);
+                        xhr.send();
+                    });
+                </script>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
