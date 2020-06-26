@@ -43,6 +43,21 @@
 
 ## [5. JSON, Ajax](lesson05)
 
+* Формат JSON
+* Синтаксис JSON
+* Объект JSON
+  * Функция stringify()
+  * Функция parse()
+* Ошибки при использовании JSON
+* Метод toJSON()
+* Синхронные и асинхронные запросы
+* Ajax
+* Объект XMLHttpRequest
+  * События onload, onloadend, onerror
+* Запросы на удаленный сервер
+* Методы GET и POST
+* Объект FormData
+
 ## [6. ECMAScript 6](lesson06)
 
 ## Полезные ссылки

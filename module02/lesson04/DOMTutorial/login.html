@@ -25,12 +25,15 @@
             projectId: 'dom-tutorial'
         };
         firebase.initializeApp(firebaseConfig);
+        firebase.auth().onAuthStateChanged((user) => {
+            console.log(user);
+        });
 
         // Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
         ui.start('#firebaseui-auth-container', {
-            signInSuccessUrl: history.go(-1),
+            // signInSuccessUrl: history.go(-1),
             signInOptions: [
                 // firebase.auth.EmailAuthProvider.PROVIDER_ID,
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID
