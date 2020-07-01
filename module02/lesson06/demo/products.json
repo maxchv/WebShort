@@ -1,0 +1,31 @@
+[{
+        "name": "product 1",
+        "price": 100000,
+        "count": 10,
+        "image": "https://i8.rozetka.ua/goods/15682337/copy_asus_90nb0p42_m00220_5def64f01cc2b_images_15682337560.jpg"
+    },
+    {
+        "name": "product 2",
+        "price": 150000,
+        "count": 10,
+        "image": "https://i8.rozetka.ua/goods/15682337/copy_asus_90nb0p42_m00220_5def64f01cc2b_images_15682337560.jpg"
+    },
+    {
+        "name": "product 3",
+        "price": 10000,
+        "count": 100,
+        "image": "https://i8.rozetka.ua/goods/15682337/copy_asus_90nb0p42_m00220_5def64f01cc2b_images_15682337560.jpg"
+    },
+    {
+        "name": "product 4",
+        "price": 130000,
+        "count": 1,
+        "image": "https://i8.rozetka.ua/goods/15682337/copy_asus_90nb0p42_m00220_5def64f01cc2b_images_15682337560.jpg"
+    },
+    {
+        "name": "IPhone",
+        "price": 330000,
+        "count": 100,
+        "image": "https://i8.rozetka.ua/goods/15682337/copy_asus_90nb0p42_m00220_5def64f01cc2b_images_15682337560.jpg"
+    }
+]

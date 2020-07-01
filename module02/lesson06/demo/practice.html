@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            border: 1px solid;
+            height: 200px;
+            width: 200px;
+        }
+
+        .product figure {
+            display: block;
+            max-width: 100%;
+        }
+
+        .product img {
+            width: 100%;
+        }
+
+        .buy {
+            text-align: center;
+        }
+
+        #basket {
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            height: 70px;
+            width: 70px;
+            border: 1px solid;
+            border-radius: 100px;
+            background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/openmoji/252/basket_1f9fa.png');
+            background-size: cover;
+        }
+
+        .count {
+            display: block;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            font-size: medium;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div id="basket"><span class="count">0</span></div>
+    </main>
+    <script>
+        class Product {
+            constructor(name, price, count) {
+                this.name = name;
+                this.price = price;
+                this.count = count;
+            }
+        }
+
+        class Basket {
+            constructor() {
+                this.products = [];
+            }
+
+            add(product) {
+                this.products.push(product);
+            }
+
+            sum() {
+                let s = 0;
+                for (let p of this.products) {
+                    s += p.price * p.count;
+                }
+                return s;
+            }
+
+            discount() {
+                let s = this.sum();
+                if (s > 1000) {
+                    return s * 0.03;
+                }
+                return 0;
+            }
+        }
+
+        const basket = new Basket();
+
+        function displayProducts(products) {
+            let main = document.querySelector('main');
+            for (let p of products) {
+                let div = document.createElement('div');
+                div.product = p;
+                div.classList.add('product');
+                main.append(div);
+                div.innerHTML = `<figure>
+                                    <img src="${p.image}" alt="" />
+                                </figure>
+                                <div class="name">${p.name}</div>
+                                <div class="price">${p.price}</div>
+                                <div class="buy">
+                                    <button>Купить</button>
+                                </div>`;
+            }
+        }
+
+        // загрузка данных с сервера
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "products.json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                let data = JSON.parse(xhr.responseText);
+                displayProducts(data);
+            }
+        };
+        xhr.send();
+    </script>
+</body>
+
+</html>
