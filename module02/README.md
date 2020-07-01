@@ -60,4 +60,17 @@
 
 ## [6. ECMAScript 6](lesson06)
 
+* Что такое ECMAScript 6?
+* История возникновения
+* Переменные
+* Тип данных Symbol
+* Функции-стрелки
+* Использование строк
+* Объекты и классы
+* Модули
+* Другие возможности ECMAScript 6
+
 ## Полезные ссылки
+
+* [ECMAScript 6 — New Features: Overview & Comparison](http://es6-features.org/)
+* [Рoзуміння ECMAScript 6](https://understandinges6.denysdovhan.com/)
