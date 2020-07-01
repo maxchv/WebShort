@@ -26,6 +26,11 @@
             width: 100%;
         }
 
+        .product .name {
+            text-align: center;
+            font-weight: bold;
+        }
+
         .buy {
             text-align: center;
         }
@@ -57,7 +62,7 @@
 
 <body>
     <main>
-        <div id="basket"><span class="count">0</span></div>
+        <div id="basket"><span class="count"></span></div>
     </main>
     <script>
         class Product {
@@ -71,13 +76,27 @@
         class Basket {
             constructor() {
                 this.products = [];
+                this.count = 0;
+                this.node = document.getElementById("basket");
+                this.node.addEventListener('click', this.showBasket.bind(this));
+                this.updateBasket();
+            }
+
+            showBasket() {
+                confirm(`Сумма к оплате: ${this.sumPrice()} С учетом скидки: ${this.sumPrice() - this.discount()}`)
+            }
+
+            updateBasket() {
+                this.node.firstChild.innerHTML = this.count;
             }
 
             add(product) {
                 this.products.push(product);
+                this.count += product.count;
+                this.updateBasket();
             }
 
-            sum() {
+            sumPrice() {
                 let s = 0;
                 for (let p of this.products) {
                     s += p.price * p.count;
@@ -86,7 +105,7 @@
             }
 
             discount() {
-                let s = this.sum();
+                let s = this.sumPrice();
                 if (s > 1000) {
                     return s * 0.03;
                 }
@@ -96,11 +115,26 @@
 
         const basket = new Basket();
 
+        const main = document.querySelector('main');
+
+        main.addEventListener('click', function (e) {
+            // console.log(e.target);
+            if (e.target.nodeName == 'BUTTON') {
+                console.log("Покупка");
+                let div = e.target.parentElement.parentElement;
+                const product = div.product;
+                if (product.count > 0) {
+                    basket.add(new Product(product.name, product.price, 1));
+                    product.count--;
+                }
+            }
+        });
+
         function displayProducts(products) {
-            let main = document.querySelector('main');
             for (let p of products) {
                 let div = document.createElement('div');
                 div.product = p;
+                console.log(div);
                 div.classList.add('product');
                 main.append(div);
                 div.innerHTML = `<figure>

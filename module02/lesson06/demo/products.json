@@ -1,7 +1,7 @@
 [{
         "name": "product 1",
         "price": 100000,
-        "count": 10,
+        "count": 0,
         "image": "https://i8.rozetka.ua/goods/15682337/copy_asus_90nb0p42_m00220_5def64f01cc2b_images_15682337560.jpg"
     },
     {
