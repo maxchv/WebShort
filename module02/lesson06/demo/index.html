@@ -40,6 +40,16 @@
 </head>
 
 <body>
+    <script>
+        const name = "Вася";
+        let age = 10;
+        if (true) {
+            let age = 21;
+            console.log(age);
+        }
+        // console.log("Имя: " + name + " Возраст: " + age);
+        console.log(`Имя: ${name} Возраст: ${age}`); // Интерполяция строк
+    </script>
     <header>
         <h1>EcmaScript 6</h1>
     </header>
@@ -48,9 +58,63 @@
             <header>
                 <h2>Классы</h2>
             </header>
-            <div>
+            <div></div>
+            <script>
+                // // let student = {
+                // //     name: "Вася",
+                // //     age: 17,
+                // //     toHtml: function () {
+                // //         let div = document.createElement("div");
+                // //         let name = document.createElement("p");
+                // //         name.append(document.createTextNode(this.name));
+                // //         let age = document.createElement("p");
+                // //         age.append(document.createTextNode(this.age));
+                // //         div.append(name);
+                // //         div.append(age);
+                // //         return div;
+                // //     }
+                // // }
+                // function Student(name, age) {
+                //     this.name = name;
+                //     this.age = age;
+                // }
+                // Student.prototype.toHtml = function () {
+                //     let div = document.createElement("div");
+                //     let name = document.createElement("p");
+                //     name.append(document.createTextNode(this.name));
+                //     let age = document.createElement("p");
+                //     age.append(document.createTextNode(this.age));
+                //     div.append(name);
+                //     div.append(age);
+                //     return div;
+                // }
+                class Student {
 
-            </div>
+                    constructor(name, age) {
+                        this.name = name;
+                        this.age = age;
+                    }
+
+                    toString() {
+                        return this.name + " " + this.age;
+                    }
+
+                    toHtml() {
+                        let div = document.createElement("div");
+                        let name = document.createElement("p");
+                        name.append(document.createTextNode(this.name));
+                        let age = document.createElement("p");
+                        age.append(document.createTextNode(this.age));
+                        div.append(name);
+                        div.append(age);
+                        return div;
+                    }
+                }
+                let div = document.querySelector("div");
+                let student = new Student("Вася", 17);
+                console.log(student + "");
+                div.append(student.toHtml());
+            </script>
         </section>
         <section>
             <header>
