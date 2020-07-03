@@ -5,9 +5,9 @@
 const http = require('http');
 
 const form = `<form method='post'>
-    login: <input name='login' require/>
+    Login: <input name='login' required />
     <br/>
-    passw: <input type='password' name='password' require />
+    Passw: <input type='password' name='password' required />
     <br/>
     <input type='submit'/>
 </form>`;
@@ -18,7 +18,31 @@ const server = http.createServer(function (req, resp) {
     console.log("Url: ", req.url);
     console.log("Headers: ", req.headers);
     if (req.method == 'POST') {
-        resp.end("<h1>Welcome to secret page!!!</h1>")
+        let body = '';
+        req.on('data', function (data) {
+            body += data;
+        });
+        req.on('end', function (data) {
+            console.log(body);
+            let parts = body.split('&');
+            let login = '';
+            let password = '';
+            for (let part of parts) {
+                let p = part.split('=');
+                if (p[0] == 'login') {
+                    login = p[1];
+                } else if (p[0] == 'password') {
+                    password = p[1];
+                }
+            }
+            if (login == 'admin' && password == '123') {
+                resp.end("<h1>Welcome to secret page!!!</h1>");
+            } else {
+                resp.statusCode = 403;
+                resp.end("<h1>Forbidden</h1>");
+            }
+        });
+
     } else {
         // формируем ответ
         resp.end(form);
