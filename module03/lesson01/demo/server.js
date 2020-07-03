@@ -3,6 +3,9 @@
 // console.log(os.cpus())
 
 const http = require('http');
+const {
+    resolve
+} = require('path');
 
 const form = `<form method='post'>
     Login: <input name='login' required />
@@ -17,6 +20,9 @@ const server = http.createServer(function (req, resp) {
     console.log("Method:", req.method);
     console.log("Url: ", req.url);
     console.log("Headers: ", req.headers);
+
+    resp.setHeader('Content-Type', 'text/html');
+
     if (req.method == 'POST') {
         let body = '';
         req.on('data', function (data) {
