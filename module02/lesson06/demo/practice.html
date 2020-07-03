@@ -72,13 +72,32 @@
                 this.count = count;
             }
         }
+        let obj = {
+            demo: "test"
+        }
+
+        let callback = function () {
+            console.log(this);
+        };
+
+        let arrowFunc = () => {
+
+        };
+
+        const main = document.querySelector('main');
+        main.addEventListener('click', callback.bind(obj));
 
         class Basket {
             constructor() {
                 this.products = [];
                 this.count = 0;
                 this.node = document.getElementById("basket");
-                this.node.addEventListener('click', this.showBasket.bind(this));
+                // this.node.addEventListener('click', this.showBasket.bind(this));
+                this.node.addEventListener('click', () => {
+                    confirm(
+                        `Сумма к оплате: ${this.sumPrice()} С учетом скидки: ${this.sumPrice() - this.discount()}`
+                        );
+                });
                 this.updateBasket();
             }
 
@@ -115,7 +134,7 @@
 
         const basket = new Basket();
 
-        const main = document.querySelector('main');
+
 
         main.addEventListener('click', function (e) {
             // console.log(e.target);
