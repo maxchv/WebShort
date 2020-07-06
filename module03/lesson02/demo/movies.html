@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW10</title>
+    <style>
+        table {
+            border: black 1px solid;
+        }
+
+        .btn {
+            text-align: center;
+        }
+
+        .movie {
+            width: 170px;
+            display: block;
+            border: 1px solid;
+        }
+
+        .movie img {
+            width: 70px;
+            float: left;
+        }
+
+        .movie div {
+            margin: 10px;
+            text-align: center;
+        }
+
+        #results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        #navigation {
+            text-align: center;
+        }
+
+        #navigation div {
+            background: green;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid;
+            display: inline-block;
+            width: 50px;
+            height: 20px;
+            text-align: center;
+        }
+
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+
+        <caption>Search</caption>
+
+        <tbody>
+            <tr>
+                <td>Title</td>
+                <td><input type="text" name="search" id="search_box" class='search_box'></td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>
+                    <select id="type">
+                        <option>movie</option>
+                        <option>series</option>
+                        <option>episode</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="btn">
+                    <button id="search">Search</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="searchresults">Results <span class="word"></span></div>
+    <div class="update">
+        <div id="results"></div>
+        <div style="clear: both"></div>
+        <div id="navigation">
+            <div class="active">&lt;</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>&gt;</div>
+        </div>
+    </div>
+    <template>
+        <div class='movie'>
+            <img src="" alt="movie" />
+            <div class='type'>movie</div>
+            <div class='title'>title</div>
+            <div class='year'>year</div>
+            <button class='details'>Details</button>
+        </div>
+    </template>
+    <script>
+        let searchBox = document.getElementById("search_box");
+        let searchButton = document.getElementById("search");
+        let typeBox = document.getElementById("type");
+        let template = document.querySelector('template');
+        let nav = document.getElementById("navigation");
+        let idx = 0;
+        let lastMovies;
+
+        function page() {
+            results.innerHTML = '';
+            const movieTemplate = template.content.firstElementChild.cloneNode(true);
+            let end = idx + 3;
+            console.log("Page: ", idx)
+            for (let m of lastMovies.slice(idx, end)) {
+                let movie = movieTemplate.cloneNode(true);
+                movie.children[0].src = m.Poster;
+                movie.children[1].innerHTML = m.Type;
+                movie.children[2].innerHTML = m.Title;
+                movie.children[3].innerHTML = m.Year;
+
+                results.append(movie);
+            }
+        }
+
+        nav.addEventListener('click', function (e) {
+            let btn = e.target;
+            switch (btn.innerHTML) {
+                case '1':
+                    idx = 0;
+                    break;
+                case '2':
+                    idx = 3;
+                    break;
+                case '3':
+                    idx = 6;
+                    break;
+                case '4':
+                    idx = 9;
+                    break;
+                case '&lt;':
+                    idx -= 3;
+                    break;
+                case '&gt;':
+                    idx += 3;
+                    break;
+            }
+            page();
+        })
+
+        function displayMovies(movies) {
+            // tbody.innerHTML += `<tr>
+            //                     <td>${i+1}</td>
+            //                     <td><img src="${movies[i].Poster}"/></td>
+            //                     <td>${movies[i].Title}</td>
+            //                     <td>${movies[i].Type}</td>
+            //                     <td>${movies[i].Year}</td>
+            //                </tr>`;
+            results.innerHTML = '';
+            const movieTemplate = template.content.firstElementChild.cloneNode(true);
+            idx = 0;
+            lastMovies = movies;
+            let end = idx + 3;
+            for (let m of movies.slice(idx, end)) {
+                let movie = movieTemplate.cloneNode(true);
+                movie.children[0].src = m.Poster;
+                movie.children[1].innerHTML = m.Type;
+                movie.children[2].innerHTML = m.Title;
+                movie.children[3].innerHTML = m.Year;
+
+                results.append(movie);
+            }
+        }
+
+        function findMovie(title, type) {
+            const url = `http://www.omdbapi.com/?apikey=fabf6e83&s=${title}&type=${type}&plot=full`;
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener("readystatechange", function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    let json = xhr.responseText;
+                    console.log(json);
+                    let response = JSON.parse(json);
+                    console.dir(response);
+                    if (response.Response == "True") {
+                        displayMovies(response.Search);
+                    } else {
+                        alert(response.Error);
+                    }
+                }
+            });
+            xhr.open('GET', url, true);
+            xhr.send();
+        }
+
+        searchButton.addEventListener('click', function (e) {
+            let text = searchBox.value;
+            let type = typeBox.value;
+            console.log("Search by: ", text, "and", type);
+            findMovie(text, type);
+        });
+    </script>
+</body>
+
+</html>
