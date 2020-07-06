@@ -1,0 +1,15 @@
+{
+  "name": "events-tutorial",
+  "version": "1.0.0",
+  "description": "Events tutorial",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
