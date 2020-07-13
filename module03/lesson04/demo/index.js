@@ -1,4 +1,5 @@
-const fs = require("fs");
+const todo = require("./todo.js");
+const student = require("./student.js");
 const express = require("express");
 const app = express();
 
@@ -22,49 +23,11 @@ app.get("/about", function (request, response) {
     response.send("<h1>About this site</h1>")
 });
 
-app.get("/todo", function (request, response) {
-    response.sendFile(__dirname + "/public/todo.html");
-});
+app.get("/todo", todo.get);
 
-app.post("/todo", function (request, response) {
-    console.log(request.body);
-    const task = request.body.task;
-    fs.appendFile(__dirname + "/db/todo.txt", task + "\n", function () {
+app.post("/todo", todo.post);
 
-    });
-
-    fs.readFile(__dirname + "/public/todo.html", {
-        encoding: "utf-8"
-    }, function (err, html) {
-        html = html.replace("{{todo}}", task);
-        response.send(html);
-    });
-    //response.sendFile(__dirname + "/public/todo.html");
-});
-
-const students = [{
-        name: "Вася",
-        age: 19
-    },
-    {
-        name: "Маша",
-        age: 23
-    },
-    {
-        name: "Рома",
-        age: 17
-    },
-];
-
-app.get("/student/:id", function (request, response, next) {
-    let id = parseInt(request.params.id);
-    if (!isNaN(id)) {
-        let idx = id - 1;
-        let s = students[idx];
-        response.send(`<h1>${s.name}, ${s.age}</h1>`);
-    }
-    response.send(`Id = ${request.params.id}`);
-});
+app.get("/student/:id", student.get);
 
 
 app.listen(3000, function () {
