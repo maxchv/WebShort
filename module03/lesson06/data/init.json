@@ -1,0 +1,41 @@
+[{
+    "title": "Модуль для загрузки файлов multer",
+    "image": "https://res.cloudinary.com/practicaldev/image/fetch/s--LqPnGRgC--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/hryq136swg3qzhjsq309.png",
+    "intro": "Для загрузки файлов на сервер будем использовать модуль <a href='https://github.com/expressjs/multer/blob/master/doc/README-ru.md'>multer</a>",
+    "published": "17.07.2020",
+    "author": "Шаптала Максим",
+    "link": "https://github.com/expressjs/multer/blob/master/doc/README-ru.md"
+  },
+  {
+    "title": "Используем MongoDB в node.js",
+    "image": "https://netolink.ru/wp-content/uploads/2019/10/%D0%91%D0%BB%D0%BE%D0%B3.jpg",
+    "intro": "Быстрый старт <a href='http://mongodb.github.io/node-mongodb-native/3.5/quick-start/quick-start/'>Перейти</a>",
+    "published": "17.07.2020",
+    "author": "Шаптала Максим",
+    "link": "http://mongodb.github.io/node-mongodb-native/3.5/quick-start/quick-start/"
+  },
+  {
+    "title": "Создаем базу данных MongoDB",
+    "image": "https://cdn.educba.com/academy/wp-content/uploads/2018/12/Is-MongoDB-NoSQL.jpg",
+    "intro": "Регистрация и создание бд MongoDB <a href='https://youtu.be/xhAYGeZoZTk'>Смотреть видео</a>, <a href='https://docs.atlas.mongodb.com/getting-started/'>Пошаговая инструкция</a>",
+    "published": "17.07.2020",
+    "author": "Шаптала Максим",
+    "link": "https://youtu.be/xhAYGeZoZTk"
+  },
+  {
+    "title": "Нереляционная база данных MongoDB",
+    "image": "https://cdn.educba.com/academy/wp-content/uploads/2018/12/Is-MongoDB-NoSQL.jpg",
+    "intro": "Нереляционная база данных MongoDB <a href='https://www.mongodb.com'>Перейти на сайт</a>",
+    "published": "17.07.2020",
+    "author": "Шаптала Максим",
+    "link": "https://www.mongodb.com"
+  },
+  {
+    "title": "Реляционные и нереляционные базы данных",
+    "image": "https://s.dou.ua/storage-files/image3_AbVyGPs.png",
+    "intro": "В чем разница и какую выбрать? <a href='http://falbar.ru/article/raznica-mezhdu-sql-i-nosql-mysql-i-mongodb'>Статья</a>",
+    "published": "17.07.2020",
+    "author": "Шаптала Максим",
+    "link": "http://falbar.ru/article/raznica-mezhdu-sql-i-nosql-mysql-i-mongodb"
+  }
+]
