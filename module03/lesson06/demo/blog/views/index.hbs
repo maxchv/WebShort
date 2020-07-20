@@ -1,8 +1,6 @@
 <div class="col-md-8">
 
-    <h1 class="my-4">Page Heading
-        <small>Secondary Text</small>
-    </h1>
+    <h1 class="my-4">{{title}}</h1>
 
     <!-- Blog Post -->
     {{#each posts}}
@@ -10,7 +8,7 @@
         <img class="card-img-top" src="{{image}}" alt="Card image cap">
         <div class="card-body">
             <h2 class="card-title">{{title}}</h2>
-            <p class="card-text">{{intro}}</p>
+            <p class="card-text">{{{intro}}}</p>
             <a href="/post/{{_id}}" class="btn btn-primary">Read More &rarr;</a>
         </div>
         <div class="card-footer text-muted">
