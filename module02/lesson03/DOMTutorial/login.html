@@ -26,15 +26,19 @@
         };
         firebase.initializeApp(firebaseConfig);
 
-        // Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                // Initialize the FirebaseUI Widget using Firebase.
+                const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-        ui.start('#firebaseui-auth-container', {
-            //signInSuccessUrl: history.go(-1),
-            signInOptions: [
-                // firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID
-            ]
+                ui.start('#firebaseui-auth-container', {
+                    signInSuccessUrl: 'https://maxchv.github.io/WebShort/module02/lesson03/DOMTutorial/',
+                    signInOptions: [
+                        // firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                        firebase.auth.GoogleAuthProvider.PROVIDER_ID
+                    ]
+                });
+            }
         });
     </script>
 </body>
