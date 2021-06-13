@@ -100,7 +100,7 @@
                     });
             },
             listenAttempt: function (userId, ref) {
-                ref.collection("tutorial1")
+                ref.collection("tutorial2")
                     .orderBy("timestamp")
                     .onSnapshot(querySnapshot => {
                         querySnapshot.docChanges().forEach(codeChanges => {
