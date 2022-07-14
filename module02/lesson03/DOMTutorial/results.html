@@ -84,7 +84,7 @@
             addUser: function (user, userId) {
                 console.log('addUser', user, userId);
                 const row = document.createElement("tr");
-                row.id = userId;
+                row.id = `_${userId}`;
                 const td = document.createElement("td");
                 td.append(document.createTextNode(user.fullName));
                 row.append(td);
@@ -95,7 +95,7 @@
             },
             addAttempt: function (userId, data, tutorial) {
                 console.log('addAttempt', userId, data, tutorial);
-                const tr = document.querySelector(`#${userId}`);
+                const tr = document.querySelector(`#_${userId}`);
                 const ol = tr.lastElementChild.firstElementChild;
                 const li = document.createElement("li");
                 li.append(document.createTextNode(
