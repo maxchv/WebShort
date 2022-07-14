@@ -38,16 +38,25 @@
 </head>
 
 <body>
+    <header>
+        <select>
+            <option>all</option>
+            <option>tutorial1</option>
+            <option>tutorial2</option>
+            <option>tutorial3</option>
+        </select>
+    </header>
     <table>
         <thead>
             <tr>
-                <th>ФИО</th>
+                <th>Name</th>
                 <th>Code</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
     <script>
+
         const process = {
             firebaseConfig: {
                 apiKey: 'AIzaSyBvR7BIHXwChpYp4AEKzEr2J5_9y_j3q3U',
@@ -56,18 +65,24 @@
             },
             init: function () {
                 firebase.initializeApp(this.firebaseConfig);
+                this.start(() => true)
+            },
+            start: function (filter) {
+                this.filter = filter;
                 firebase.auth().onAuthStateChanged((user) => {
                     if (user) {
                         console.log(user);
                         this.db = firebase.firestore();
-                        this.listenUsers(this.db);
                         this.table = document.querySelector("tbody");
+                        this.table.innerHTML = '';
+                        this.listenUsers(this.db);
                     } else {
                         location = 'login.html';
                     }
                 });
             },
             addUser: function (user, userId) {
+                console.log('addUser', user, userId);
                 const row = document.createElement("tr");
                 row.id = userId;
                 const td = document.createElement("td");
@@ -78,12 +93,13 @@
                 row.append(codeTd);
                 this.table.prepend(row);
             },
-            addAttempt: function (userId, data) {
+            addAttempt: function (userId, data, tutorial) {
+                console.log('addAttempt', userId, data, tutorial);
                 const tr = document.querySelector(`#${userId}`);
                 const ol = tr.lastElementChild.firstElementChild;
                 const li = document.createElement("li");
                 li.append(document.createTextNode(
-                    `[${data.task}] ${data.code} (${data.timestamp.toDate().toLocaleString('UK')})`
+                    `[${tutorial} #${data.task}] ${data.code} (${data.timestamp.toDate().toLocaleString('UK')})`
                 ));
                 ol.prepend(li);
             },
@@ -100,17 +116,28 @@
                     });
             },
             listenAttempt: function (userId, ref) {
-                ref.collection("tutorial2")
-                    .orderBy("timestamp")
-                    .onSnapshot(querySnapshot => {
-                        querySnapshot.docChanges().forEach(codeChanges => {
-                            const data = codeChanges.doc.data();
-                            this.addAttempt(userId, data);
-                            console.log(codeChanges.doc.id, data);
-                        });
+                ['tutorial1', 'tutorial2', 'tutorial3']
+                    .filter(t => this.filter(t))
+                    .forEach(tutorial => {
+                        ref.collection(tutorial)
+                            .orderBy("timestamp")
+                            .onSnapshot(querySnapshot => {
+                                querySnapshot.docChanges().forEach(codeChanges => {
+                                    const data = codeChanges.doc.data();
+                                    this.addAttempt(userId, data, tutorial);
+                                    console.log(codeChanges.doc.id, data);
+                                });
+                            });
                     });
             }
         };
+
+        const selectTutorial = document.querySelector('select');
+        selectTutorial.addEventListener('change', function (e) {
+            console.log(e.target.value);
+            const v = e.target.value;
+            process.start(t => v === 'all' ? true : v === t);
+        });
 
         process.init();
     </script>
