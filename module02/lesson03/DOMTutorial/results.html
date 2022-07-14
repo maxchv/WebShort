@@ -89,7 +89,9 @@
                 td.append(document.createTextNode(user.fullName));
                 row.append(td);
                 const codeTd = document.createElement("td");
-                codeTd.append(document.createElement("ol"));
+                const ol = document.createElement("ol");
+                ol.reversed = 'reversed';
+                codeTd.append(ol);
                 row.append(codeTd);
                 this.table.prepend(row);
             },
